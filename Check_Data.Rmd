@@ -1,0 +1,67 @@
+---
+title: "Check_Data"
+author: "Amalan"
+date: "21/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,fig.width = 7,fig.height = 7,warning = FALSE,message = FALSE)
+library(readr)
+library(here)
+library(dplyr)
+library(corrr)
+library(corrplot)
+library(GGally)
+```
+
+# Model 1 Testing
+
+```{r Model 1 Testing}
+load(here("Identical_r0","Generate_Big_Data","Model_1","No_Correlated_Covariate.RData"))
+Original_Data<-as.data.frame(Simulated_Data$All_Data$Assumed_Model_3)
+no_of_Variables<-2
+
+colnames(Original_Data)<-c("Y","X0",paste0("X",1:no_of_Variables),
+                           paste0("X",1:no_of_Variables,"^2"))
+
+glm(Y~.-1,data=as.data.frame(Original_Data),family="binomial")->Model_1
+stepAIC(Model_1,direction = "backward")
+```
+
+# Model 2 Testing
+
+```{r Model 2 Testing}
+load(here("Identical_r0","Generate_Big_Data","Model_2","No_Correlated_Covariate.RData"))
+Original_Data<-as.data.frame(Simulated_Data$All_Data$Assumed_Model_3)
+no_of_Variables<-2
+colnames(Original_Data)<-c("Y","X0",paste0("X",1:no_of_Variables),
+                           paste0("X",1:no_of_Variables,"^2"))
+glm(Y~.-1,data=as.data.frame(Original_Data),family="binomial")->Model_2
+stepAIC(Model_2,direction = "backward")
+```
+
+# Model 3 Testing
+
+```{r Model 3 Testing}
+load(here("Identical_r0","Generate_Big_Data","Model_3","No_Correlated_Covariate.RData"))
+Original_Data<-as.data.frame(Simulated_Data$All_Data$Assumed_Model_3)
+no_of_Variables<-2
+colnames(Original_Data)<-c("Y","X0",paste0("X",1:no_of_Variables),
+                           paste0("X",1:no_of_Variables,"^2"))
+glm(Y~.-1,data=as.data.frame(Original_Data),family="binomial")->Model_3
+stepAIC(Model_3,direction = "backward")
+```
+
+
+# Model 4 Testing
+
+```{r Model 4 Testing}
+load(here("Identical_r0","Generate_Big_Data","Model_4","No_Correlated_Covariate.RData"))
+Original_Data<-as.data.frame(Simulated_Data$All_Data$Real_Model)
+no_of_Variables<-2
+colnames(Original_Data)<-c("Y","X0",paste0("X",1:no_of_Variables),
+                           paste0("X",1:no_of_Variables,"^2"))
+glm(Y~.-1,data=as.data.frame(Original_Data),family="binomial")->Model_4
+stepAIC(Model_4,direction = "backward")
+```
