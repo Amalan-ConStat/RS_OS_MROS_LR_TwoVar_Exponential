@@ -15,4 +15,5 @@ library(tidyr)
 library(ggplot2)
 library(matrixStats)
 
-cat("\n Welcome to Subsampling in Logistic Regression from Big Data.\n")
+cat("Welcome to Subsampling in Logistic Regression for Model Free scenario 
+     comparing the real and the assumed model in Big Data.")

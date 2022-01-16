@@ -2,7 +2,7 @@
 title: "Publication Ready"
 author: "Amalan"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
-output: github_default
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
