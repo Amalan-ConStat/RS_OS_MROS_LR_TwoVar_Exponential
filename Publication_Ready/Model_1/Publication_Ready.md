@@ -1,23 +1,12 @@
----
-title: "Publication Ready"
-author: "Amalan"
-date: 'January 16, 2022'
-output: github_document
----
-
-
+Publication Ready
+================
+Amalan
+January 16, 2022
 
 # Using Exponential Distribution for Data
 
-## Model : Model_1 
+## Model : Model\_1
 
+![plot of chunk Identical r0 Plots](Plots/Identical%20r0%20Plots-1.png)
 
-
-
-
-
-![plot of chunk Identical r0 Plots](Plots/Identical r0 Plots-1.png)
-
-
-
-![plot of chunk All Plots](Plots/All Plots-1.png)
+![plot of chunk All Plots](Plots/All%20Plots-1.png)
