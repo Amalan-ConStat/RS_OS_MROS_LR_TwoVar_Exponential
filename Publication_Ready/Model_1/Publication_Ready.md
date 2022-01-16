@@ -2,7 +2,7 @@
 title: "Publication Ready"
 author: "Amalan"
 date: 'January 16, 2022'
-output: github_default
+output: github_document
 ---
 
 
