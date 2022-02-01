@@ -48,7 +48,7 @@ All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
-New_Labels<-c("RM",paste0("AM ",1:3),"MF")
+New_Labels<-c("RM",paste0("AM ",1:3),"MR")
 
 ## mMSE
 for (i in 1:length(Old_Labels)) 
@@ -111,7 +111,7 @@ All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
-New_Labels<-c("RM",paste0("AM ",1:3),"MF")
+New_Labels<-c("RM",paste0("AM ",1:3),"MR")
 
 ## mMSE
 for (i in 1:length(Old_Labels)) 
@@ -174,7 +174,7 @@ All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
-New_Labels<-c("RM",paste0("AM ",1:3),"MF")
+New_Labels<-c("RM",paste0("AM ",1:3),"MR")
 
 ## mMSE
 for (i in 1:length(Old_Labels)) 
@@ -237,7 +237,7 @@ All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
-New_Labels<-c("RM",paste0("AM ",1:3),"MF")
+New_Labels<-c("RM",paste0("AM ",1:3),"MR")
 
 ## mMSE
 for (i in 1:length(Old_Labels)) 
@@ -287,22 +287,22 @@ Identical_ro$Model<-factor(Identical_ro$Model,
                            levels = c("RS RM","RS AM 1","RS AM 2","RS AM 3",
                                       "OSMAC mMSE RM","OSMAC mMSE AM 1","OSMAC mMSE AM 2","OSMAC mMSE AM 3",
                                       "OSMAC mVc RM", "OSMAC mVc AM 1", "OSMAC mVc AM 2","OSMAC mVc AM 3",
-                                      "OSMAC mMSE MF","OSMAC mVc MF"))
+                                      "OSMAC mMSE MR","OSMAC mVc MR"))
 
-Selected_Models_mMSE<-c("RS RM","RS AM 1","RS AM 2","RS AM 3",
+Selected_Models_mMSE<-c("RS RM",#"RS AM 1","RS AM 2","RS AM 3",
                         "OSMAC mMSE RM","OSMAC mMSE AM 1","OSMAC mMSE AM 2","OSMAC mMSE AM 3",
-                        "OSMAC mMSE MF")
+                        "OSMAC mMSE MR")
 
-Colors_mMSE<-c("#FFC4D8", "#E28490","#BB2C3E","#55141C",
-               "#88CCEE", "#A6C3D3","#5D92B0","#35586C", 
+Colors_mMSE<-c("#88CCEE", #"#A6C3D3","#5D92B0","#35586C", 
+               "#FFC4D8", "#E28490","#BB2C3E","#55141C",
                "#DDCC77")
 
-Selected_Models_mVc<-c("RS RM","RS AM 1","RS AM 2","RS AM 3",
+Selected_Models_mVc<-c("RS RM",#"RS AM 1","RS AM 2","RS AM 3",
                        "OSMAC mVc RM", "OSMAC mVc AM 1", "OSMAC mVc AM 2","OSMAC mVc AM 3",
-                       "OSMAC mVc MF")
+                       "OSMAC mVc MR")
 
-Colors_mVc<-Colors_mVc<-c("#FFC4D8","#E28490","#BB2C3E","#55141C", 
-                          "#88CCEE","#A6C3D3","#5D92B0","#35586C", 
+Colors_mVc<-Colors_mVc<-c("#88CCEE",#"#A6C3D3","#5D92B0","#35586C", 
+                          "#FFC4D8","#E28490","#BB2C3E","#55141C", 
                           "#DDCC77")
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
