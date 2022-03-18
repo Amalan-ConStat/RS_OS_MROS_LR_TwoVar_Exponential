@@ -1,10 +1,10 @@
 
-# RM_AM_MF_LR_TwoVar_Exponential
+# RS_OS_MROS_LR_TwoVar_Exponential
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-### Real Model vs Assumed Model vs Model Free method for the Logistic Regression with Two variable where the covariate data is simulated from the exponential distribution.
+### Random Sampling vs Optimal Sub-sampling vs Model Robust Optimal Sub-sampling method for the Logistic Regression with Two variable where the covariate data is simulated from the exponential distribution.
 
 A new model free method is compared with the existing OSMAC method under the circumstances where the initial sample size is same or otherwise for each simulation. 
 
