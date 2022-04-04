@@ -3,7 +3,7 @@ library(ezknitr)
 library(rmarkdown)
 
 Model<-c("Model_1","Model_2",
-         "Model_3","Model_4") ; j=4
+         "Model_3","Model_4") ; j=1
 
 for (j in 1:length(Model)) 
 {

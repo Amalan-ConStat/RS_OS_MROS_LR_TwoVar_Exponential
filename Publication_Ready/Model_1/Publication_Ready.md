@@ -1,11 +1,11 @@
 Publication Ready
 ================
 Amalan
-January 16, 2022
+April 04, 2022
 
 # Using Exponential Distribution for Data
 
-## Model : Model\_1
+## Model : Model_1
 
 ![plot of chunk Identical r0 Plots](Plots/Identical%20r0%20Plots-1.png)
 

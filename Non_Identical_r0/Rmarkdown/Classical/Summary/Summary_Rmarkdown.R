@@ -3,7 +3,7 @@ library(ezknitr)
 library(rmarkdown)
 
 Model<-c("Model_1","Model_2",
-         "Model_3","Model_4");# i=4
+         "Model_3","Model_4"); i=1
 
 # Best_Subsampling_Method ----
 for (i in 1:length(Model))

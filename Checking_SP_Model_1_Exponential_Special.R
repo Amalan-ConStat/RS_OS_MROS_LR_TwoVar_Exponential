@@ -65,9 +65,9 @@ Plot_Collection_2<-list()
 All_Plots_1<-list()
 All_Plots_2<-list()
 
-Rate<-3
+Rate<-sqrt(3)
 
-Theta<-as.matrix(cbind(-1,0.4,seq(0.1,0.9,0.2)))
+Theta<-as.matrix(cbind(-2,1.5,seq(0.1,0.9,0.2)))
 #Theta<-as.matrix(cbind(-1,seq(0.1,0.9,0.2),0.5))
 #Theta<-as.matrix(cbind(-1,seq(0.1,0.9,0.2),seq(0.1,0.9,0.2)))
 
@@ -188,7 +188,7 @@ ggarrange(ggarrange(plotlist =All_Plots_2[[1]],nrow = 1),
 cbind(Testing,Testing_2)
 
 Model_Path<-"Model_1"; Subsample_Size<-1500; r0<-Nc_size<-100; Replicates <- 1000
-Simulated_Data<-Simulated_Data[[1]]
+Simulated_Data<-Simulated_Data[[2]]
 
 save(list = c("Simulated_Data","Subsample_Size","Replicates","Model_Path","Nc_size","r0"),
      file=here("Identical_r0","Generate_Big_Data",Model_Path,"No_Correlated_Covariate.RData"))

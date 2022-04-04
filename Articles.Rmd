@@ -24,6 +24,11 @@ library(ggpubr)
 # Using Exponential Distribution for Data
 
 ```{r Load data model 1}
+load(here("Identical_r0","Generate_Big_Data","Model_1","No_Correlated_Covariate.RData"))
+Model_1_SS<-r0
+
+remove(Simulated_Data,Model_1,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
+
 # Random Sampling
 load(here("Non_Identical_r0","Summary","Classical","Model_1","Data","Efficiency","No_Correlated_Covariate_RS.RData"))
 
@@ -79,13 +84,22 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
 
-M1_Identical_r0<-rbind(cbind.data.frame(Covariate="X1, X2",Metric="Model Information",All_Info),
-                       cbind.data.frame(Covariate="X1, X2",Metric="MSE",All_MSE))
+M1_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: X1, X2",Metric="Model Information",
+                                        All_Info),
+                       cbind.data.frame(Covariate="Data Model: X1, X2",Metric="MSE",
+                                        All_MSE))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE)
+
+M1_Identical_r0$Subsample_Size<-M1_Identical_r0$Subsample_Size-Model_1_SS
 ```
 
 ```{r Load data model 2}
+load(here("Identical_r0","Generate_Big_Data","Model_2","No_Correlated_Covariate.RData"))
+Model_2_SS<-r0
+
+remove(Simulated_Data,Model_2,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
+
 # Random Sampling
 load(here("Non_Identical_r0","Summary","Classical","Model_2","Data","Efficiency","No_Correlated_Covariate_RS.RData"))
 
@@ -141,13 +155,22 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
 
-M2_Identical_r0<-rbind(cbind.data.frame(Covariate="X1, X2, X1\u00B2",Metric="Model Information",All_Info),
-                       cbind.data.frame(Covariate="X1, X2, X1\u00B2",Metric="MSE",All_MSE))
+M2_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: X1, X2, X1\u00B2",Metric="Model Information",
+                                        All_Info),
+                       cbind.data.frame(Covariate="Data Model: X1, X2, X1\u00B2",Metric="MSE",
+                                        All_MSE))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE)
+
+M2_Identical_r0$Subsample_Size<-M2_Identical_r0$Subsample_Size-Model_2_SS
 ```
 
 ```{r Load data model 3}
+load(here("Identical_r0","Generate_Big_Data","Model_3","No_Correlated_Covariate.RData"))
+Model_3_SS<-r0
+
+remove(Simulated_Data,Model_3,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
+
 # Random Sampling
 load(here("Non_Identical_r0","Summary","Classical","Model_3","Data","Efficiency","No_Correlated_Covariate_RS.RData"))
 
@@ -203,13 +226,22 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
 
-M3_Identical_r0<-rbind(cbind.data.frame(Covariate="X1, X2, X2\u00B2",Metric="Model Information",All_Info),
-                       cbind.data.frame(Covariate="X1, X2, X2\u00B2",Metric="MSE",All_MSE))
+M3_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: X1, X2, X2\u00B2",Metric="Model Information",
+                                        All_Info),
+                       cbind.data.frame(Covariate="Data Model: X1, X2, X2\u00B2",Metric="MSE",
+                                        All_MSE))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE)
+
+M3_Identical_r0$Subsample_Size<-M3_Identical_r0$Subsample_Size-Model_3_SS
 ```
 
 ```{r Load data model 4}
+load(here("Identical_r0","Generate_Big_Data","Model_4","No_Correlated_Covariate.RData"))
+Model_4_SS<-r0
+
+remove(Simulated_Data,Model_4,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
+
 # Random Sampling
 load(here("Non_Identical_r0","Summary","Classical","Model_4","Data","Efficiency","No_Correlated_Covariate_RS.RData"))
 
@@ -265,10 +297,14 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
 
-M4_Identical_r0<-rbind(cbind.data.frame(Covariate="X1, X2, X1\u00B2, X2\u00B2",Metric="Model Information",All_Info),
-                       cbind.data.frame(Covariate="X1, X2, X1\u00B2, X2\u00B2",Metric="MSE",All_MSE))
+M4_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: X1, X2, X1\u00B2, X2\u00B2",Metric="Model Information",
+                                        All_Info),
+                       cbind.data.frame(Covariate="Data Model: X1, X2, X1\u00B2, X2\u00B2",Metric="MSE",
+                                        All_MSE))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE)
+
+M4_Identical_r0$Subsample_Size<-M4_Identical_r0$Subsample_Size-Model_4_SS
 ```
 
 ```{r combine data and plot,fig.width = 18,fig.height = 10}
@@ -276,26 +312,56 @@ Identical_ro<-rbind(M1_Identical_r0,M2_Identical_r0,
                     M3_Identical_r0,M4_Identical_r0)
 
 Identical_ro$Covariate<-factor(Identical_ro$Covariate,
-                               levels = c("X1, X2","X1, X2, X1\u00B2",
-                                          "X1, X2, X2\u00B2","X1, X2, X1\u00B2, X2\u00B2"))
+                               levels = c("Data Model: X1, X2",
+                                          "Data Model: X1, X2, X1\u00B2",
+                                          "Data Model: X1, X2, X2\u00B2",
+                                          "Data Model: X1, X2, X1\u00B2, X2\u00B2"))
 
 Identical_ro$Model<-factor(Identical_ro$Model,
                            levels = c("RS DM","RS AM 1","RS AM 2","RS AM 3",
                                       "mMSE DM","mMSE AM 1","mMSE AM 2","mMSE AM 3",
-                                      "mVc DM", "mVc AM 1", "mVc AM 2","mVc AM 3",
+                                      "mVc DM","mVc AM 1","mVc AM 2","mVc AM 3",
                                       "mMSE MR","mVc MR"))
 
-Selected_Models_mMSE<-c("RS DM",#"RS AM 1","RS AM 2","RS AM 3",
-                        "mMSE DM","mMSE AM 1","mMSE AM 2","mMSE AM 3",
-                        "mMSE MR")
+Identical_ro$Model<-recode_factor(Identical_ro$Model,
+                                  `RS DM`="Random Sampling: Data Model",
+                                  `RS AM 1`="Random Sampling: Incorrect Model 1",
+                                  `RS AM 2`="Random Sampling: Incorrect Model 2",
+                                  `RS AM 3`="Random Sampling: Incorrect Model 3",
+                                  `mMSE DM`="Optimal Sub-sampling mMSE: Data Model",
+                                  `mMSE AM 1`="Optimal Sub-sampling mMSE: Incorrect Model 1",
+                                  `mMSE AM 2`="Optimal Sub-sampling mMSE: Incorrect Model 2",
+                                  `mMSE AM 3`="Optimal Sub-sampling mMSE: Incorrect Model 3",
+                                  `mVc DM`="Optimal Sub-sampling mVc: Data Model 1",
+                                  `mVc AM 1`="Optimal Sub-sampling mVc: Incorrect Model 1",
+                                  `mVc AM 2`="Optimal Sub-sampling mVc: Incorrect Model 2",
+                                  `mVc AM 3`="Optimal Sub-sampling mVc: Incorrect Model 3",
+                                  `mMSE MR`="Model Robust Optimal Sub-sampling mMSE: Data Model",
+                                  `mVc MR`="Model Robust Optimal Sub-sampling mVc: Data Model")
+
+Selected_Models_mMSE<-c("Random Sampling: Data Model",
+                        #"Random Sampling: Incorrect Model 1",
+                        #"Random Sampling: Incorrect Model 2",
+                        #"Random Sampling: Incorrect Model 3",
+                        "Optimal Sub-sampling mMSE: Data Model",
+                        "Optimal Sub-sampling mMSE: Incorrect Model 1",
+                        "Optimal Sub-sampling mMSE: Incorrect Model 2",
+                        "Optimal Sub-sampling mMSE: Incorrect Model 3",
+                        "Model Robust Optimal Sub-sampling mMSE: Data Model")
 
 Colors_mMSE<-c("#88CCEE", #"#A6C3D3","#5D92B0","#35586C", 
                "#FFC4D8", "#E28490","#BB2C3E","#55141C",
                "#DDCC77")
 
-Selected_Models_mVc<-c("RS DM",#"RS AM 1","RS AM 2","RS AM 3",
-                       "mVc DM", "mVc AM 1", "mVc AM 2","mVc AM 3",
-                       "mVc MR")
+Selected_Models_mVc<-c("Random Sampling: Data Model",
+                       #"Random Sampling: Incorrect Model 1",
+                       #"Random Sampling: Incorrect Model 2",
+                       #"Random Sampling: Incorrect Model 3",
+                       "Optimal Sub-sampling mVc: Data Model 1",
+                       "Optimal Sub-sampling mVc: Incorrect Model 1",
+                       "Optimal Sub-sampling mVc: Incorrect Model 2",
+                       "Optimal Sub-sampling mVc: Incorrect Model 3",
+                       "Model Robust Optimal Sub-sampling mVc: Data Model")
 
 Colors_mVc<-Colors_mVc<-c("#88CCEE",#"#A6C3D3","#5D92B0","#35586C", 
                           "#FFC4D8","#E28490","#BB2C3E","#55141C", 
@@ -307,12 +373,63 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
                      breaks = unique(Identical_ro$Subsample_Size))+
   geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab("Sub-sample size")+ylab("Model Information")+expand_limits(y = 0)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("Model Information")+expand_limits(y = 0)+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
+  theme_bw()+guides(colour = guide_legend(nrow = 2))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->Temp_plot_mMSE
+
+Temp_legend_mMSE<-get_legend(Temp_plot_mMSE)
+
+Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
+  scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
+                     breaks = unique(Identical_ro$Subsample_Size))+
+  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("Model Information")+expand_limits(y = 0)+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
+  theme_bw()+guides(colour = guide_legend(nrow = 2))+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->Temp_plot_mVc
+
+Temp_legend_mVc<-get_legend(Temp_plot_mVc)
+
+Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
+  scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
+                     breaks = unique(Identical_ro$Subsample_Size))+
+  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank())->p1
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p1
 
+Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
+  scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
+                     breaks = unique(Identical_ro$Subsample_Size))+
+  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("Model Information")+expand_limits(y = 0)+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p1
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
@@ -320,11 +437,14 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
                      breaks = unique(Identical_ro$Subsample_Size))+
   geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab("Sub-sample size")+ylab("Model Information")+expand_limits(y = 0)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank())->p2
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p2
   
 Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
@@ -332,11 +452,14 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
                      breaks = unique(Identical_ro$Subsample_Size))+
   geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab("Sub-sample size")+ylab("SMSE")+expand_limits(y = 0)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("SMSE")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank())->p3
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p3
 
 
 Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
@@ -345,13 +468,16 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
                      breaks = unique(Identical_ro$Subsample_Size))+
   geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab("Sub-sample size")+ylab("SMSE")+expand_limits(y = 0)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("SMSE")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank())->p4
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p4
 
-ggarrange(p1,p3,nrow = 2,ncol = 1,common.legend = TRUE,legend = "right")
-ggarrange(p2,p4,nrow = 2,ncol = 1,common.legend = TRUE,legend = "right")
+ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom")
+ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom")
 ```
 
