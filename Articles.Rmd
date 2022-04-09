@@ -84,9 +84,9 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
 
-M1_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: X1, X2",Metric="Model Information",
+M1_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="Model Information",
                                         All_Info),
-                       cbind.data.frame(Covariate="Data Model: X1, X2",Metric="MSE",
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="MSE",
                                         All_MSE))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE)
@@ -155,9 +155,9 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
 
-M2_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: X1, X2, X1\u00B2",Metric="Model Information",
+M2_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="Model Information",
                                         All_Info),
-                       cbind.data.frame(Covariate="Data Model: X1, X2, X1\u00B2",Metric="MSE",
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="MSE",
                                         All_MSE))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE)
@@ -226,9 +226,9 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
 
-M3_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: X1, X2, X2\u00B2",Metric="Model Information",
+M3_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="Model Information",
                                         All_Info),
-                       cbind.data.frame(Covariate="Data Model: X1, X2, X2\u00B2",Metric="MSE",
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="MSE",
                                         All_MSE))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE)
@@ -297,25 +297,25 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
 
-M4_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: X1, X2, X1\u00B2, X2\u00B2",Metric="Model Information",
-                                        All_Info),
-                       cbind.data.frame(Covariate="Data Model: X1, X2, X1\u00B2, X2\u00B2",Metric="MSE",
-                                        All_MSE))
+M4_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
+                                        Metric="Model Information",All_Info),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
+                                        Metric="MSE",All_MSE))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE)
 
 M4_Identical_r0$Subsample_Size<-M4_Identical_r0$Subsample_Size-Model_4_SS
 ```
 
-```{r combine data and plot,fig.width = 18,fig.height = 10}
+```{r combine data and plot,fig.width = 8,fig.height = 12}
 Identical_ro<-rbind(M1_Identical_r0,M2_Identical_r0,
                     M3_Identical_r0,M4_Identical_r0)
 
 Identical_ro$Covariate<-factor(Identical_ro$Covariate,
-                               levels = c("Data Model: X1, X2",
-                                          "Data Model: X1, X2, X1\u00B2",
-                                          "Data Model: X1, X2, X2\u00B2",
-                                          "Data Model: X1, X2, X1\u00B2, X2\u00B2"))
+                               levels = c("Data Model: x\u2081, x\u2082",
+                                          "Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",
+                                          "Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",
+                                          "Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2"))
 
 Identical_ro$Model<-factor(Identical_ro$Model,
                            levels = c("RS DM","RS AM 1","RS AM 2","RS AM 3",
@@ -350,7 +350,7 @@ Selected_Models_mMSE<-c("Random Sampling: Data Model",
                         "Model Robust Optimal Sub-sampling mMSE: Data Model")
 
 Colors_mMSE<-c("#88CCEE", #"#A6C3D3","#5D92B0","#35586C", 
-               "#FFC4D8", "#E28490","#BB2C3E","#55141C",
+               "#FFC4D8","#E28490","#BB2C3E","#55141C",
                "#DDCC77")
 
 Selected_Models_mVc<-c("Random Sampling: Data Model",
@@ -367,11 +367,14 @@ Colors_mVc<-Colors_mVc<-c("#88CCEE",#"#A6C3D3","#5D92B0","#35586C",
                           "#FFC4D8","#E28490","#BB2C3E","#55141C", 
                           "#DDCC77")
 
+#Identical_ro<-Identical_ro[Identical_ro$Subsample_Size %in% seq(100,1000,100),]
+
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("Model Information")+expand_limits(y = 0)+
@@ -388,7 +391,8 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("Model Information")+expand_limits(y = 0)+
@@ -405,8 +409,9 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mMSE)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
@@ -420,8 +425,9 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mMSE)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
@@ -435,8 +441,9 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mVc)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mVc)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
@@ -450,8 +457,9 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mMSE)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("SMSE")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
@@ -466,8 +474,9 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+scale_color_manual(values=Colors_mVc)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mVc)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("SMSE")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
@@ -477,7 +486,12 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
         axis.title.x = element_text(color = "black",face = "bold",size = 12),
         axis.title.y = element_text(color = "black",face = "bold",size = 12))->p4
 
-ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom")
-ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom")
+ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto")
+ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom",labels = "auto")
+
+ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto") %>%
+  ggexport(filename = "SMSE_MI_LR_TV_Nor_mMSE.pdf",res=300,width = 12,height = 16)
+ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom",labels = "auto") %>% 
+  ggexport(filename = "SMSE_MI_LR_TV_Nor_mVc.pdf",res=300,width = 12,height = 16)
 ```
 
