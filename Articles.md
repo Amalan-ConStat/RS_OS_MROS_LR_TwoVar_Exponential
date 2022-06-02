@@ -1,7 +1,7 @@
 Articles_Plots
 ================
 Amalan
-April 09, 2022
+June 02, 2022
 
 # Using Exponential Distribution for Data
 

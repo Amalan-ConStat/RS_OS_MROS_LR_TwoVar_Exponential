@@ -332,7 +332,7 @@ Identical_ro$Model<-recode_factor(Identical_ro$Model,
                                   `mMSE AM 1`="Optimal Sub-sampling mMSE: Incorrect Model 1",
                                   `mMSE AM 2`="Optimal Sub-sampling mMSE: Incorrect Model 2",
                                   `mMSE AM 3`="Optimal Sub-sampling mMSE: Incorrect Model 3",
-                                  `mVc DM`="Optimal Sub-sampling mVc: Data Model 1",
+                                  `mVc DM`="Optimal Sub-sampling mVc: Data Model",
                                   `mVc AM 1`="Optimal Sub-sampling mVc: Incorrect Model 1",
                                   `mVc AM 2`="Optimal Sub-sampling mVc: Incorrect Model 2",
                                   `mVc AM 3`="Optimal Sub-sampling mVc: Incorrect Model 3",
@@ -349,23 +349,33 @@ Selected_Models_mMSE<-c("Random Sampling: Data Model",
                         "Optimal Sub-sampling mMSE: Incorrect Model 3",
                         "Model Robust Optimal Sub-sampling mMSE: Data Model")
 
-Colors_mMSE<-c("#88CCEE", #"#A6C3D3","#5D92B0","#35586C", 
-               "#FFC4D8","#E28490","#BB2C3E","#55141C",
-               "#DDCC77")
+# Colors_mMSE<-c("#88CCEE", #"#A6C3D3","#5D92B0","#35586C", 
+#                "#FFC4D8","#E28490","#BB2C3E","#55141C",
+#                "#DDCC77")
+
+Colors_mMSE<-c("black",#"grey","grey","grey",
+              "#cc0000", 
+              "#ff578a","#ff578a","#ff578a",
+              "darkgreen")
 
 Selected_Models_mVc<-c("Random Sampling: Data Model",
                        #"Random Sampling: Incorrect Model 1",
                        #"Random Sampling: Incorrect Model 2",
                        #"Random Sampling: Incorrect Model 3",
-                       "Optimal Sub-sampling mVc: Data Model 1",
+                       "Optimal Sub-sampling mVc: Data Model",
                        "Optimal Sub-sampling mVc: Incorrect Model 1",
                        "Optimal Sub-sampling mVc: Incorrect Model 2",
                        "Optimal Sub-sampling mVc: Incorrect Model 3",
                        "Model Robust Optimal Sub-sampling mVc: Data Model")
 
-Colors_mVc<-Colors_mVc<-c("#88CCEE",#"#A6C3D3","#5D92B0","#35586C", 
-                          "#FFC4D8","#E28490","#BB2C3E","#55141C", 
-                          "#DDCC77")
+# Colors_mVc<-Colors_mVc<-c("#88CCEE",#"#A6C3D3","#5D92B0","#35586C", 
+#                           "#FFC4D8","#E28490","#BB2C3E","#55141C", 
+#                           "#DDCC77")
+
+Colors_mVc<-c("black",#"grey","grey","grey",
+              "#cc0000", 
+              "#ff578a","#ff578a","#ff578a",
+              "darkgreen")
 
 #Identical_ro<-Identical_ro[Identical_ro$Subsample_Size %in% seq(100,1000,100),]
 
