@@ -127,7 +127,7 @@ methods.
     information are estimated at each simulation and are applied for the
     generated big data.
 
-#### 2.2.1.4 OSMAC_Algorithm.R and OSMAC_Setup.R \[Non Identical r0\]
+#### 2.2.1.5 OSMAC_Algorithm.R and OSMAC_Setup.R \[Non Identical r0\]
 
 -   The optimal sub-sampling and a setup to apply these methods such
     that model parameters and model information are estimated at each
