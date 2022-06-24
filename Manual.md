@@ -1,5 +1,5 @@
 Manual of comparing optimal subsampling with model robust optimal
-subsampling method for LogisticRegression (Exponential Distribution)
+subsampling method for logistic regression (exponential distribution)
 ================
 
 # 1. Overview
@@ -269,5 +269,5 @@ method individually.
     every model and its respective big data.
 
 -   Use **Articles.Rmd** to generate plots relevant to the paper as pdf
-    files **SMSE_MI_LR_TV_Nor_mMSE.pdf** and
-    **SMSE_MI_LR_TV_Nor_mVc.pdf**.
+    files **SMSE_MI_LR_TV_Exp_mMSE.pdf** and
+    **SMSE_MI_LR_TV_Exp_mVc.pdf**.

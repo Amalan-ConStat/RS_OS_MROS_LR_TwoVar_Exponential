@@ -1,5 +1,5 @@
 ---
-title: "Manual of comparing optimal subsampling with model robust optimal subsampling method for LogisticRegression (Exponential Distribution)"
+title: "Manual of comparing optimal subsampling with model robust optimal subsampling method for logistic regression (exponential distribution)"
 output: github_document
 ---
 
@@ -173,4 +173,4 @@ Each model related covariate data is separately used on each subsampling method 
 
 * Use **Publication_Ready_command.R** to run **Publication.Rmd** on every model and its respective big data.
 
-* Use **Articles.Rmd** to generate plots relevant to the paper as pdf files **SMSE_MI_LR_TV_Nor_mMSE.pdf** and **SMSE_MI_LR_TV_Nor_mVc.pdf**. 
+* Use **Articles.Rmd** to generate plots relevant to the paper as pdf files **SMSE_MI_LR_TV_Exp_mMSE.pdf** and **SMSE_MI_LR_TV_Exp_mVc.pdf**. 
