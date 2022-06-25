@@ -136,6 +136,8 @@ Each model related covariate data is separately used on each subsampling method 
 
 * While in the **Simulation_Setup** results are stored for analysis purposes, the same results are stored here. 
 
+* In **Identical_r0** for OSMAC Assumed Models there are two forms of outputs, 1) **OSMAC_output_New_x.Rdata** is when optimal sub-sampling probabilities are selected from the re-calculated probabilities of the Data Generating model, 2) **OSMAC_output_Old_x.Rdata** is when optimal sub-sampling probabilities are calculated based on the Assumed model. Throughout the simulation setup the later output is used. 
+
 ![](Images/Outputs.png)
 
 ## 2.4 Rmarkdown
