@@ -17,10 +17,8 @@ This setup is considered for the Logistic Regression over 1000 simulations for t
 1. Checking_SP_Model_1_Exponential_Special.R
 2. Check_Data.Rmd
 3. Setup_Data.R
-4. OSMAC_Setup.R [Identical_r0] 
-4. Random_Sampling.R, RE_Random_Sampling_Setup.R, OSMAC_Setup.R and OSMAC_Model_Free_Setup.R [Non_Identical_r0]
-5. OSMAC_Command.R [Identical_r0]
-5. RE_and_Random_Sampling_and_OSMAC.R [Non_Identical_r0]
+4. OSMAC_Setup.R [Identical_r0]; Random_Sampling.R, RE_Random_Sampling_Setup.R, OSMAC_Setup.R and OSMAC_Model_Free_Setup.R [Non_Identical_r0]
+5. OSMAC_Command.R [Identical_r0]; RE_and_Random_Sampling_and_OSMAC.R [Non_Identical_r0]
 6. Summary_Rmarkdown.R
 7. Publication_Ready_Command.R
 8. Articles.Rmd
