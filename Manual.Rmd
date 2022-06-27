@@ -1,6 +1,8 @@
 ---
 title: "Manual of comparing optimal subsampling with model robust optimal subsampling method for logistic regression (exponential distribution)"
-output: github_document
+output: 
+  github_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}

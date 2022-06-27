@@ -23,4 +23,6 @@ This setup is considered for the Logistic Regression over 1000 simulations for t
 7. Publication_Ready_Command.R
 8. Articles.Rmd
 
+For a complete understanding of the Rproject setup refer Manual.md or Manual.html
+
 ![](Images/Brief_FullDiagram.png)
