@@ -14,6 +14,8 @@ This setup is considered for the Logistic Regression over 1000 simulations for t
 
 ## Brief summary of how to run the simulation
 
+Run files from 3 to 8 to obtain the results as in the paper.
+
 1. Checking_SP_Model_1_Exponential_Special.R
 2. Check_Data.Rmd
 3. Setup_Data.R
