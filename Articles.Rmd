@@ -27,7 +27,7 @@ library(ggpubr)
 load(here("Identical_r0","Generate_Big_Data","Model_1","No_Correlated_Covariate.RData"))
 Model_1_SS<-r0
 
-remove(Simulated_Data,Model_1,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
+remove(Simulated_Data,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
 
 # Random Sampling
 load(here("Non_Identical_r0","Summary","Classical","Model_1","Data","Efficiency","No_Correlated_Covariate_RS.RData"))
@@ -39,18 +39,21 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
 }
 
 RS_Info<-All_Info
 RS_MSE<-All_MSE
+RS_ACC<-Accuracy_Data
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # OSMAC
 load(here("Identical_r0","Summary","Classical","Model_1","Data","Efficiency","No_Correlated_Covariate_OSMAC.RData"))
 remove_stuff<-c(paste0("Assumed New ",1:3))
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
+All_ACC<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
 New_Labels<-c("DM",paste0("AM ",1:3),"MR")
@@ -60,6 +63,7 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
+  All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
 }
 
 ## mVc
@@ -67,29 +71,35 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
+  All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
 }
 
 OSMAC_Info<-All_Info
 OSMAC_MSE<-All_MSE
+OSMAC_ACC<-All_ACC
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # All elements
 All_MSE<-rbind(RS_MSE,OSMAC_MSE[,!(colnames(OSMAC_MSE) %in% "Type")])
 All_Info<-rbind(RS_Info,OSMAC_Info[,!(colnames(OSMAC_Info) %in% "Type")])
+All_ACC<-rbind(RS_ACC,OSMAC_ACC[,!(colnames(OSMAC_ACC) %in% "Type")])
 
 All_Objects<-ls()
 remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
+colnames(All_ACC)[3]<-"Estimated Values"
 
 M1_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="Model Information",
                                         All_Info),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="MSE",
-                                        All_MSE))
+                                        All_MSE),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="Accuracy",
+                                        All_ACC))
 
-remove(All_Info,All_MSE,RS_Info,RS_MSE)
+remove(All_Info,All_MSE,RS_Info,RS_MSE,All_ACC)
 
 M1_Identical_r0$Subsample_Size<-M1_Identical_r0$Subsample_Size-Model_1_SS
 ```
@@ -98,7 +108,7 @@ M1_Identical_r0$Subsample_Size<-M1_Identical_r0$Subsample_Size-Model_1_SS
 load(here("Identical_r0","Generate_Big_Data","Model_2","No_Correlated_Covariate.RData"))
 Model_2_SS<-r0
 
-remove(Simulated_Data,Model_2,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
+remove(Simulated_Data,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
 
 # Random Sampling
 load(here("Non_Identical_r0","Summary","Classical","Model_2","Data","Efficiency","No_Correlated_Covariate_RS.RData"))
@@ -110,18 +120,21 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
 }
 
 RS_Info<-All_Info
 RS_MSE<-All_MSE
+RS_ACC<-Accuracy_Data
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # OSMAC
 load(here("Identical_r0","Summary","Classical","Model_2","Data","Efficiency","No_Correlated_Covariate_OSMAC.RData"))
 remove_stuff<-c(paste0("Assumed New ",1:3))
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
+Accuracy_Data<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
 New_Labels<-c("DM",paste0("AM ",1:3),"MR")
@@ -131,6 +144,7 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & Accuracy_Data$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
 }
 
 ## mVc
@@ -138,29 +152,35 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & Accuracy_Data$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
 }
 
 OSMAC_Info<-All_Info
 OSMAC_MSE<-All_MSE
+OSMAC_ACC<-Accuracy_Data
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # All elements
 All_MSE<-rbind(RS_MSE,OSMAC_MSE[,!(colnames(OSMAC_MSE) %in% "Type")])
 All_Info<-rbind(RS_Info,OSMAC_Info[,!(colnames(OSMAC_Info) %in% "Type")])
+All_ACC<-rbind(RS_ACC,OSMAC_ACC[,!(colnames(OSMAC_ACC) %in% "Type")])
 
 All_Objects<-ls()
 remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
+colnames(All_ACC)[3]<-"Estimated Values"
 
 M2_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="Model Information",
                                         All_Info),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="MSE",
-                                        All_MSE))
+                                        All_MSE),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="Accuracy",
+                                        All_ACC))
 
-remove(All_Info,All_MSE,RS_Info,RS_MSE)
+remove(All_Info,All_MSE,RS_Info,RS_MSE,All_ACC)
 
 M2_Identical_r0$Subsample_Size<-M2_Identical_r0$Subsample_Size-Model_2_SS
 ```
@@ -169,7 +189,7 @@ M2_Identical_r0$Subsample_Size<-M2_Identical_r0$Subsample_Size-Model_2_SS
 load(here("Identical_r0","Generate_Big_Data","Model_3","No_Correlated_Covariate.RData"))
 Model_3_SS<-r0
 
-remove(Simulated_Data,Model_3,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
+remove(Simulated_Data,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
 
 # Random Sampling
 load(here("Non_Identical_r0","Summary","Classical","Model_3","Data","Efficiency","No_Correlated_Covariate_RS.RData"))
@@ -181,18 +201,21 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
 }
 
 RS_Info<-All_Info
 RS_MSE<-All_MSE
+RS_ACC<-Accuracy_Data
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # OSMAC
 load(here("Identical_r0","Summary","Classical","Model_3","Data","Efficiency","No_Correlated_Covariate_OSMAC.RData"))
 remove_stuff<-c(paste0("Assumed New ",1:3))
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
+All_ACC<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
 New_Labels<-c("DM",paste0("AM ",1:3),"MR")
@@ -202,6 +225,7 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
+  All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
 }
 
 ## mVc
@@ -209,29 +233,35 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
+  All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
 }
 
 OSMAC_Info<-All_Info
 OSMAC_MSE<-All_MSE
+OSMAC_ACC<-All_ACC
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,All_ACC)
 
 # All elements
 All_MSE<-rbind(RS_MSE,OSMAC_MSE[,!(colnames(OSMAC_MSE) %in% "Type")])
 All_Info<-rbind(RS_Info,OSMAC_Info[,!(colnames(OSMAC_Info) %in% "Type")])
+All_ACC<-rbind(RS_ACC,OSMAC_ACC[,!(colnames(OSMAC_ACC) %in% "Type")])
 
 All_Objects<-ls()
 remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
+colnames(All_ACC)[3]<-"Estimated Values"
 
 M3_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="Model Information",
                                         All_Info),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="MSE",
-                                        All_MSE))
+                                        All_MSE),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="Accuracy",
+                                        All_ACC))
 
-remove(All_Info,All_MSE,RS_Info,RS_MSE)
+remove(All_Info,All_MSE,RS_Info,RS_MSE,All_ACC)
 
 M3_Identical_r0$Subsample_Size<-M3_Identical_r0$Subsample_Size-Model_3_SS
 ```
@@ -240,7 +270,7 @@ M3_Identical_r0$Subsample_Size<-M3_Identical_r0$Subsample_Size-Model_3_SS
 load(here("Identical_r0","Generate_Big_Data","Model_4","No_Correlated_Covariate.RData"))
 Model_4_SS<-r0
 
-remove(Simulated_Data,Model_4,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
+remove(Simulated_Data,Nc_size,r0,Replicates,Subsample_Size,Model_Path)
 
 # Random Sampling
 load(here("Non_Identical_r0","Summary","Classical","Model_4","Data","Efficiency","No_Correlated_Covariate_RS.RData"))
@@ -252,18 +282,21 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
 }
 
 RS_Info<-All_Info
 RS_MSE<-All_MSE
+RS_ACC<-Accuracy_Data
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # OSMAC
 load(here("Identical_r0","Summary","Classical","Model_4","Data","Efficiency","No_Correlated_Covariate_OSMAC.RData"))
 remove_stuff<-c(paste0("Assumed New ",1:3))
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
+All_ACC<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
 New_Labels<-c("DM",paste0("AM ",1:3),"MR")
@@ -273,6 +306,7 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
+  All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
 }
 
 ## mVc
@@ -280,29 +314,35 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
+  All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
 }
 
 OSMAC_Info<-All_Info
 OSMAC_MSE<-All_MSE
+OSMAC_ACC<-All_ACC
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,All_ACC)
 
 # All elements
 All_MSE<-rbind(RS_MSE,OSMAC_MSE[,!(colnames(OSMAC_MSE) %in% "Type")])
 All_Info<-rbind(RS_Info,OSMAC_Info[,!(colnames(OSMAC_Info) %in% "Type")])
+All_ACC<-rbind(RS_ACC,OSMAC_ACC[,!(colnames(OSMAC_ACC) %in% "Type")])
 
 All_Objects<-ls()
 remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
+colnames(All_ACC)[3]<-"Estimated Values"
 
 M4_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
                                         Metric="Model Information",All_Info),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
-                                        Metric="MSE",All_MSE))
+                                        Metric="MSE",All_MSE),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
+                                        Metric="Accuracy",All_ACC))
 
-remove(All_Info,All_MSE,RS_Info,RS_MSE)
+remove(All_Info,All_MSE,RS_Info,RS_MSE,RS_ACC)
 
 M4_Identical_r0$Subsample_Size<-M4_Identical_r0$Subsample_Size-Model_4_SS
 ```
@@ -431,22 +471,6 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
         axis.title.x = element_text(color = "black",face = "bold",size = 12),
         axis.title.y = element_text(color = "black",face = "bold",size = 12))->p1
 
-Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
-  scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
-                     breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
-  scale_color_manual(values=Colors_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
-  ylab("Model Information")+expand_limits(y = 0)+
-  scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p1
-
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
@@ -496,12 +520,50 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
         axis.title.x = element_text(color = "black",face = "bold",size = 12),
         axis.title.y = element_text(color = "black",face = "bold",size = 12))->p4
 
+Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
+  scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
+                     breaks = unique(Identical_ro$Subsample_Size))+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mMSE)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("Accuracy")+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p5
+
+
+Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
+  scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
+                     breaks = unique(Identical_ro$Subsample_Size))+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mVc)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
+  xlab(expression(paste(r[0],' = 100 and r')))+
+  ylab("Accuracy")+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        panel.grid.minor.x = element_blank(),
+        axis.title.x = element_text(color = "black",face = "bold",size = 12),
+        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p6
+
 ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto")
 ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom",labels = "auto")
+ggarrange(p5,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom")
+ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom")
 
 ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto") %>%
   ggexport(filename = "SMSE_MI_LR_TV_Exp_mMSE.pdf",res=300,width = 12,height = 16)
 ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom",labels = "auto") %>% 
   ggexport(filename = "SMSE_MI_LR_TV_Exp_mVc.pdf",res=300,width = 12,height = 16)
+ggarrange(p5,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
+  ggexport(filename = "ACCURACY_LR_TV_Exp_mMSE.pdf",res=300,width = 12,height = 12)
+ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
+  ggexport(filename = "ACCURACY_LR_TV_Exp_mVc.pdf",res=300,width = 12,height = 12)
 ```
-

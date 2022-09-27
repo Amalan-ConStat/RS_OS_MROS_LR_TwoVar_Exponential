@@ -35,6 +35,7 @@ for (i in 1:length(Old_Labels))
   All_Info$Model[All_Info$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
   All_VAR$Model[All_VAR$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i]] <-paste0("RS ",New_Labels[i])
 }
 
 RS_Bias<-All_Bias 
@@ -42,8 +43,9 @@ RS_EMSE<-All_EMSE
 RS_Info<-All_Info
 RS_MSE<-All_MSE
 RS_VAR<-All_VAR
+RS_ACC<-Accuracy_Data
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # RE Random Sampling
 load(here("Non_Identical_r0","Summary","Classical",params$Model_Path,"Data","Efficiency",
@@ -56,6 +58,7 @@ for (i in 1:length(Old_Labels))
   All_Info$Model[All_Info$Model==Old_Labels[i]] <-paste0("RE RS ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i]] <-paste0("RE RS ",New_Labels[i])
   All_VAR$Model[All_VAR$Model==Old_Labels[i]] <-paste0("RE RS ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i]]<-paste0("RE RS ",New_Labels[i])
 }
 
 RE_RS_Bias<-All_Bias 
@@ -63,8 +66,9 @@ RE_RS_EMSE<-All_EMSE
 RE_RS_Info<-All_Info
 RE_RS_MSE<-All_MSE
 RE_RS_VAR<-All_VAR
+RE_RS_ACC<-Accuracy_Data
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # OSMAC
 load(here("Identical_r0","Summary","Classical",params$Model_Path,"Data","Efficiency",
@@ -76,10 +80,10 @@ All_EMSE<-All_EMSE[!(All_EMSE$Model %in% remove_stuff),]
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 All_VAR<-All_VAR[!(All_VAR$Model %in% remove_stuff),]
+Accuracy_Data<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
 New_Labels<-c("RM",paste0("AM ",1:3),"MF")
-
 
 ## mMSE
 for (i in 1:length(Old_Labels)) 
@@ -89,6 +93,7 @@ for (i in 1:length(Old_Labels))
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
   All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
 }
 
 OSMAC_mMSE_Bias<-All_Bias[All_Bias$Type == "mMSE",] 
@@ -96,6 +101,7 @@ OSMAC_mMSE_EMSE<-All_EMSE[All_EMSE$Type == "mMSE",]
 OSMAC_mMSE_Info<-All_Info[All_Info$Type == "mMSE",]
 OSMAC_mMSE_MSE<-All_MSE[All_MSE$Type == "mMSE",]
 OSMAC_mMSE_VAR<-All_VAR[All_VAR$Type == "mMSE",]
+OSMAC_mMSE_ACC<-Accuracy_Data[Accuracy_Data$Type == "mMSE",]
 
 ## mVc
 for (i in 1:length(Old_Labels)) 
@@ -105,6 +111,7 @@ for (i in 1:length(Old_Labels))
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
   All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
 }
 
 OSMAC_mVc_Bias<-All_Bias[All_Bias$Type == "mVc",] 
@@ -112,8 +119,9 @@ OSMAC_mVc_EMSE<-All_EMSE[All_EMSE$Type == "mVc",]
 OSMAC_mVc_Info<-All_Info[All_Info$Type == "mVc",]
 OSMAC_mVc_MSE<-All_MSE[All_MSE$Type == "mVc",]
 OSMAC_mVc_VAR<-All_VAR[All_VAR$Type == "mVc",]
+OSMAC_mVc_ACC<-Accuracy_Data[Accuracy_Data$Type == "mVc",]
 
-remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR)
+remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # All elements
 All_Bias<-rbind(RS_Bias,RE_RS_Bias,
@@ -131,6 +139,9 @@ All_Info<-rbind(RS_Info,RE_RS_Info,
 All_VAR<-rbind(RS_VAR,RE_RS_VAR,
                 OSMAC_mMSE_VAR[,!(colnames(OSMAC_mMSE_VAR) %in% "Type")],
                 OSMAC_mVc_VAR[,!(colnames(OSMAC_mVc_VAR) %in% "Type")])
+All_ACC<-rbind(RS_ACC,RE_RS_ACC,
+                OSMAC_mMSE_ACC[,!(colnames(OSMAC_mMSE_ACC) %in% "Type")],
+                OSMAC_mVc_ACC[,!(colnames(OSMAC_mVc_ACC) %in% "Type")])
 
 All_Objects<-ls()
 remove(list = All_Objects[startsWith(All_Objects,"RS")])
@@ -172,7 +183,13 @@ All_Info %>%
   theme_light()+xlab("Sub sample size")+
   ylab("Information")+ggtitle("Information")->p5
 
-ggarrange(p1,p2,p3,p4,p5,common.legend = TRUE)
+All_ACC %>%
+  ggplot(.,aes(x=Subsample_Size,y=Average_Accuracy,color=Model))+
+  geom_point()+geom_line()+scale_colour_viridis_d()+
+  theme_light()+xlab("Sub sample size")+
+  ylab("Average Accuracy")+ggtitle("Average Accuracy")->p6
+
+ggarrange(p1,p2,p3,p4,p5,p6,common.legend = TRUE)
 ```
 
 # Compare  SMSE, EMSE, Variance, Information and Bias for mMSE.
@@ -209,7 +226,13 @@ OSMAC_mMSE_Info %>%
   theme_light()+xlab("Sub sample size")+
   ylab("Information")+ggtitle("Information")->p5
 
-ggarrange(p1,p2,p3,p4,p5,common.legend = TRUE)
+OSMAC_mMSE_ACC %>%
+  ggplot(.,aes(x=Subsample_Size,y=Average_Accuracy,color=Model))+
+  geom_point()+geom_line()+scale_colour_viridis_d()+
+  theme_light()+xlab("Sub sample size")+
+  ylab("Average Accuracy")+ggtitle("Accuracy")->p6
+
+ggarrange(p1,p2,p3,p4,p5,p6,common.legend = TRUE)
 ```
 
 # Compare  SMSE, EMSE, Variance, Information and Bias for mVc.
@@ -246,5 +269,11 @@ OSMAC_mVc_Info %>%
   theme_light()+xlab("Sub sample size")+
   ylab("Information")+ggtitle("Information")->p5
 
-ggarrange(p1,p2,p3,p4,p5,common.legend = TRUE)
+OSMAC_mVc_ACC %>%
+  ggplot(.,aes(x=Subsample_Size,y=Average_Accuracy,color=Model))+
+  geom_point()+geom_line()+scale_colour_viridis_d()+
+  theme_light()+xlab("Sub sample size")+
+  ylab("Average Accuracy")+ggtitle("Accuracy")->p6
+
+ggarrange(p1,p2,p3,p4,p5,p6,common.legend = TRUE)
 ```

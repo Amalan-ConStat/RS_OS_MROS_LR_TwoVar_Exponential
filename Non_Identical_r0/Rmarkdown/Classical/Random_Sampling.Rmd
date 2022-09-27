@@ -427,17 +427,36 @@ if(params$Model_Path=="Model_4")
 
 Full_EMSE<-Full_Variance+Full_Bias*Full_Bias
 
-remove(Temp_P,Temp_W,Temp_Info)
+Full_Data<-as.matrix(Simulated_Data$All_Data$Real_Model)
+Parameter_Data<-as.matrix(Est_Parameter[,-c(1:2)])
+Parameter<-Parameter_Data[1,]
+
+Predict_Logistic_Regression<-function(Parameter)
+{
+  Estimates<-matrix(Parameter)
+  fitted_pi<-LaplacesDemon::invlogit(Full_Data[,-1]%*%Estimates)
+  fitted_response<-ifelse(fitted_pi > 0.5,1,0)
+  return(1-mean(fitted_response != Full_Data[,1]))
+}
+
+Accuracy<-apply(Parameter_Data,1,Predict_Logistic_Regression)
+
+Accuracy_Data<-cbind.data.frame(Est_Parameter[,1:2],Accuracy)
+Accuracy_Data<-Accuracy_Data %>% 
+  group_by(Model,Subsample_Size) %>%
+  summarize(Average_Accuracy=mean(Accuracy))
+
+remove(Temp_P,Temp_W,Temp_Info,Full_Data,Parameter_Data,Parameter,Accuracy)
 
 # Store the Results
-save(All_MSE,All_EMSE,All_Bias,All_VAR,All_Info,
+save(All_MSE,All_EMSE,All_Bias,All_VAR,All_Info,Accuracy_Data,
      file = here("Non_Identical_r0","Summary","Classical",params$Model_Path,"Data","Efficiency",
                  "No_Correlated_Covariate_RS.RData"))
 ```
 
 ## SMSE, EMSE, A-optimality, D-optimality, Bias Comparing Real Model and Assumed Models
 
-```{r Final plots 1,fig.width=6,fig.height=20}
+```{r Final plots 1,fig.width=6,fig.height=24}
 Plot_list<-list()
 
 All_MSE %>%
@@ -475,13 +494,19 @@ ggplot(.,aes(x=Subsample_Size,y=EMSE,color=Model))+geom_point()+
   theme_light()+xlab("Sub sample size")+
   ylab("EMSE")+ggtitle("EMSE Comparison")->Plot_list[[5]]
 
-ggarrange(plotlist = Plot_list,nrow = 5,ncol = 1,common.legend = TRUE)
+Accuracy_Data %>%
+  ggplot(.,aes(x=Subsample_Size,y=Average_Accuracy,color=Model))+geom_point()+
+  geom_line()+scale_colour_viridis_d()+
+  theme_light()+xlab("Sub sample size")+
+  ylab("Average Accuracy")+ggtitle("Average Accuracy")->Plot_list[[6]]
+
+ggarrange(plotlist = Plot_list,nrow = 6,ncol = 1,common.legend = TRUE)
 
 ```
 
 ## SMSE, EMSE, A-optimality, D-optimality, Bias Comparing Real Model and Assumed Models with Full Data Model
 
-```{r Final plots 2,fig.width=6,fig.height=20}
+```{r Final plots 2,fig.width=6,fig.height=24}
 Plot_list<-list()
 All_MSE %>%
   ungroup(Model,Subsample_Size) %>%
@@ -523,6 +548,21 @@ ggplot(.,aes(x=Subsample_Size,y=Efficiency,color=Model))+geom_point()+
   theme_light()+xlab("Sub sample size")+
   ylab("Relative Efficiency")+ggtitle("EMSE Efficiency")->Plot_list[[5]]
 
-ggarrange(plotlist = Plot_list,nrow = 5,ncol = 1,common.legend = TRUE)
+Full_Data<-as.matrix(Simulated_Data$All_Data$Real_Model)
+Parameter_Data<-as.matrix(Est_Parameter[,-c(1:3)])
+Parameter<-Parameter_Data[1,]
+
+fitted_pi<-as.vector(predict.glm(Full_model,newdata = as.data.frame(Simulated_Data$All_Data$Real_Model[,-1])))
+fitted_response<-ifelse(fitted_pi > 0.5,1,0)
+Full_Accuracy<-1-mean(fitted_response != Simulated_Data$All_Data$Real_Model[,1])
+
+Accuracy_Data %>%
+  mutate(Relative_Accuracy=Average_Accuracy/Full_Accuracy) %>%
+  ggplot(.,aes(x=Subsample_Size,y=Relative_Accuracy,color=Model))+geom_point()+
+  geom_line()+scale_colour_viridis_d()+
+  theme_light()+xlab("Sub sample size")+
+  ylab("Relative Average Accuracy")+ggtitle("Average Accuracy")->Plot_list[[6]]
+
+ggarrange(plotlist = Plot_list,nrow = 6,ncol = 1,common.legend = TRUE)
 ```
 

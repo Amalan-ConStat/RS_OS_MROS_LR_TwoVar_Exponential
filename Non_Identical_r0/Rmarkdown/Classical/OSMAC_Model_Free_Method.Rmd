@@ -779,10 +779,29 @@ Full_EMSE_AM_1<-Full_Variance_AM_1+Full_Bias_AM_1*Full_Bias_AM_1
 Full_EMSE_AM_2<-Full_Variance_AM_2+Full_Bias_AM_2*Full_Bias_AM_2
 Full_EMSE_AM_3<-Full_Variance_AM_3+Full_Bias_AM_3*Full_Bias_AM_3
 
-remove(Temp_P,Temp_W,Temp_Info)
+Full_Data<-as.matrix(Simulated_Data$All_Data$Real_Model)
+Parameter_Data<-as.matrix(Est_Parameter_RM[,-c(1:2)])
+Parameter<-Parameter_Data[1,]
+
+Predict_Logistic_Regression<-function(Parameter)
+{
+  Estimates<-matrix(Parameter)
+  fitted_pi<-LaplacesDemon::invlogit(Full_Data[,-1]%*%Estimates)
+  fitted_response<-ifelse(fitted_pi > 0.5,1,0)
+  return(1-mean(fitted_response != Full_Data[,1]))
+}
+
+Accuracy<-apply(Parameter_Data,1,Predict_Logistic_Regression)
+
+Accuracy_Data<-cbind.data.frame(Est_Parameter_RM[,1:2],Accuracy)
+Accuracy_Data<-Accuracy_Data %>% 
+  group_by(Type,Subsample_Size) %>%
+  summarize(Average_Accuracy=mean(Accuracy))
+
+remove(Temp_P,Temp_W,Temp_Info,Full_Data,Parameter_Data,Parameter,Accuracy)
 
 # Store the Results
-save(All_MSE,All_EMSE,All_Bias,All_VAR,All_Info,
+save(All_MSE,All_EMSE,All_Bias,All_VAR,All_Info,Accuracy_Data,
      file = here("Non_Identical_r0","Summary","Classical",params$Model_Path,"Data","Efficiency",
                  "No_Correlated_Covariate_OSMAC_MF.RData"))
 
@@ -790,7 +809,7 @@ save(All_MSE,All_EMSE,All_Bias,All_VAR,All_Info,
 
 ## SMSE, EMSE, A-optimality, D-optimality, Bias Comparing Real Model with with Full Data Model
 
-```{r Final plots 1,fig.width=20,fig.height=8}
+```{r Final plots 1,fig.width=24,fig.height=8}
 Plot_list<-list()
 
 All_MSE[All_MSE$Model=="Real Model",] %>%
@@ -833,7 +852,24 @@ ggplot(.,aes(x=Subsample_Size,y=Efficiency,color=Model))+geom_point()+
   theme_light()+xlab("Sub sample size")+
   ylab("Relative Efficiency")+ggtitle("EMSE Efficiency")->Plot_list[[5]]
 
-ggarrange(plotlist = Plot_list,nrow = 1,ncol = 5,common.legend = TRUE)
+FullDataPath<-here("Non_Identical_r0","Generate_Big_Data",params$Model_Path,"No_Correlated_Covariate.RData")
+load(here(FullDataPath))
+
+Full_model<-glm(Y~.-1,data = as.data.frame(Simulated_Data[[2]]$Real_Model),family = binomial)
+Full_Data<-as.matrix(Simulated_Data$All_Data$Real_Model)
+
+fitted_pi<-as.vector(predict.glm(Full_model,newdata = as.data.frame(Simulated_Data$All_Data$Real_Model[,-1])))
+fitted_response<-ifelse(fitted_pi > 0.5,1,0)
+Full_Accuracy<-1-mean(fitted_response != Simulated_Data$All_Data$Real_Model[,1])
+
+Accuracy_Data %>%
+  mutate(Relative_Accuracy=Average_Accuracy/Full_Accuracy) %>%
+  ggplot(.,aes(x=Subsample_Size,y=Relative_Accuracy))+geom_point()+
+  geom_line()+scale_colour_viridis_d()+facet_wrap(~Type,ncol = 1)+
+  theme_light()+xlab("Sub sample size")+
+  ylab("Relative Average Accuracy")+ggtitle("Average Accuracy")->Plot_list[[6]]
+
+ggarrange(plotlist = Plot_list,nrow = 1,ncol = 6,common.legend = TRUE)
 
 ```
 
