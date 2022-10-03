@@ -417,6 +417,19 @@ Colors_mVc<-c("black",#"grey","grey","grey",
               "#ff578a","#ff578a","#ff578a",
               "darkgreen")
 
+Theme_special<-function()
+{
+  theme(axis.text.x = element_text(color = "black",size=12, angle = 45, hjust=0.75), #, vjust = 0.5
+        axis.text.y = element_text(color = "black",size=12), #, vjust = 0.5, hjust=1
+        strip.text = element_text(colour = "black",size = 12,face="bold"),
+        panel.grid.minor.x = element_blank(),
+        axis.title= element_text(color = "black",face = "bold",size = 12),
+        legend.text = element_text(color = "black", size=11),
+        legend.position = "bottom",
+        legend.margin=margin(0,0,0,0),
+        legend.box.margin=margin(-1,-2,-1,-2)) 
+}
+
 #Identical_ro<-Identical_ro[Identical_ro$Subsample_Size %in% seq(100,1000,100),]
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
@@ -427,13 +440,9 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
   xlab(expression(paste(r[0],' = 100 and r')))+
-  ylab("Model Information")+expand_limits(y = 0)+
+  ylab("Average Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+guides(colour = guide_legend(nrow = 2))+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->Temp_plot_mMSE
+  theme_bw()+guides(colour = guide_legend(nrow = 2))+Theme_special()->Temp_plot_mMSE
 
 Temp_legend_mMSE<-get_legend(Temp_plot_mMSE)
 
@@ -445,13 +454,9 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
   xlab(expression(paste(r[0],' = 100 and r')))+
-  ylab("Model Information")+expand_limits(y = 0)+
+  ylab("Average Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+guides(colour = guide_legend(nrow = 2))+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->Temp_plot_mVc
+  theme_bw()+guides(colour = guide_legend(nrow = 2))+Theme_special()->Temp_plot_mVc
 
 Temp_legend_mVc<-get_legend(Temp_plot_mVc)
 
@@ -463,13 +468,9 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
-  ylab("Model Information")+expand_limits(y = 0)+
+  ylab("Average Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p1
+  theme_bw()+Theme_special()->p1
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
@@ -479,13 +480,9 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
-  ylab("Model Information")+expand_limits(y = 0)+
+  ylab("Average Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p2
+  theme_bw()+Theme_special()->p2
   
 Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
@@ -497,11 +494,7 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("SMSE")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p3
+  theme_bw()+Theme_special()->p3
 
 
 Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
@@ -514,11 +507,7 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   xlab(expression(paste(r[0],' = 100 and r')))+
   ylab("SMSE")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p4
+  theme_bw()+Theme_special()->p4
 
 Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
@@ -528,13 +517,9 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
-  ylab("Accuracy")+
+  ylab("Accuracy of Y")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p5
+  theme_bw()+Theme_special()->p5
 
 
 Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
@@ -545,13 +530,9 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' = 100 and r')))+
-  ylab("Accuracy")+
+  ylab("Accuracy of Y")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
-        panel.grid.minor.x = element_blank(),
-        axis.title.x = element_text(color = "black",face = "bold",size = 12),
-        axis.title.y = element_text(color = "black",face = "bold",size = 12))->p6
+  theme_bw()+Theme_special()->p6
 
 ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto")
 ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom",labels = "auto")
