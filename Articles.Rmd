@@ -439,7 +439,7 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
+  xlab("r")+
   ylab("Average Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+guides(colour = guide_legend(nrow = 2))+Theme_special()->Temp_plot_mMSE
@@ -453,7 +453,7 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
+  xlab("r")+
   ylab("Average Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+guides(colour = guide_legend(nrow = 2))+Theme_special()->Temp_plot_mVc
@@ -467,7 +467,7 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
+  xlab("r")+
   ylab("Average Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p1
@@ -479,7 +479,7 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
+  xlab("r")+
   ylab("Average Model Information")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p2
@@ -491,7 +491,7 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
+  xlab("r")+
   ylab("SMSE")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p3
@@ -504,7 +504,7 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
+  xlab("r")+
   ylab("SMSE")+expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p4
@@ -516,7 +516,7 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
+  xlab("r")+
   ylab("Accuracy of Y")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p5
@@ -529,7 +529,7 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' = 100 and r')))+
+  xlab("r")+
   ylab("Accuracy of Y")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p6
