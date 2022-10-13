@@ -461,26 +461,26 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
 Temp_legend_mVc<-get_legend(Temp_plot_mVc)
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=log10(`Estimated Values`),color=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab("r")+
-  ylab("log10(Average Model Information)")+#expand_limits(y = 0)+
+  ylab("log(Average Model Information)")+#expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p1
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=log10(`Estimated Values`),color=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab("r")+
-  ylab("log10(Average Model Information)")+#expand_limits(y = 0)+
+  ylab("log(Average Model Information)")+#expand_limits(y = 0)+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p2
   
