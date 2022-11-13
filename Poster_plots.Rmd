@@ -548,12 +548,7 @@ ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom")
 # ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
 #   ggexport(filename = "ACCURACY_LR_TV_Exp_mVc.pdf",res=300,width = 12,height = 12)
 
-ggarrange(p1,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
-  ggsave(filename = "Poster_SMSE_LR_TV_Exp_mMSE.eps",device="eps",dpi=300,width = 12,height = 14)
-
 ggarrange(p3,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
-  ggsave(filename = "Poster_MI_LR_TV_Exp_mMSE.eps",device="eps",dpi=300,width = 12,height = 14)
+  ggsave(filename = "Poster_SMSE_LR_TV_Exp_mMSE.eps",device="eps",dpi=300,width = 14,height = 10)
 
-ggarrange(p5,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
-  ggsave(filename = "Poster_ACCURACY_LR_TV_Exp_mMSE.eps",device="eps",dpi=300,width = 12,height = 14)
 ```
