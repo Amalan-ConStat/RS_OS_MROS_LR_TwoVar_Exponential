@@ -1,4 +1,6 @@
 ---
+params:
+  Model_Path:
 title: "Rare Event Random_Sampling; Model: `r params$Model_Path`;"
 author: "M.Amalan"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'

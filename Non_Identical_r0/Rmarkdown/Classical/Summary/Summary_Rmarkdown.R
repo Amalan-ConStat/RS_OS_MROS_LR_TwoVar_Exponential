@@ -1,5 +1,4 @@
 library(here)
-library(ezknitr)
 library(rmarkdown)
 
 Model<-c("Model_1","Model_2",
@@ -8,11 +7,16 @@ Model<-c("Model_1","Model_2",
 # Best_Subsampling_Method ----
 for (i in 1:length(Model))
 {
-  ezknit(file=here("Non_Identical_r0","Rmarkdown","Classical","Summary","Best_Subsampling_Method.Rmd"),
-         out_dir=here("Non_Identical_r0","Summary","Classical",Model[i],"Best_Subsampling"),
-         fig_dir = c("Plots"),
-         params=list("Model_Path"=Model[i]),
-         verbose = TRUE,keep_md = FALSE)
-  open_output_dir()
+  # render(input=here("Non_Identical_r0","Rmarkdown","Classical","Summary","Best_Subsampling_Method.Rmd"),
+  #        output_format = "html_document",
+  #        output_file = "Best_Subsampling_Method",
+  #        output_dir=here("Non_Identical_r0","Summary","Classical",Model[i],"Best_Subsampling"),
+  #        params=list("Model_Path"=Model[i]))
+  
+  render(input=here("Non_Identical_r0","Rmarkdown","Classical","Summary","r1_Best_Subsampling_Method.Rmd"),
+         output_format = "html_document",
+         output_file = "r1_Best_Subsampling_Method",
+         output_dir=here("Non_Identical_r0","Summary","Classical",Model[i],"Best_Subsampling"),
+         params=list("Model_Path"=Model[i]))
 }
 
