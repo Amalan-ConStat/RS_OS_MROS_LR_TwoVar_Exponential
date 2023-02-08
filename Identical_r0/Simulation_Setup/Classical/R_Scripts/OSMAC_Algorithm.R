@@ -361,8 +361,8 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
       })
         
       PI_join.mMSE<-rowSums2(cbind(alpha[1]*PI_Real.mMSE,(do.call(cbind,PI_Assumed_Old.mMSE)%*%diag(alpha[-1]))))
-      # Joined data
       
+      # Joined data
       idx_Real.mMSE <- sample(1:n, r2[i]-r1, T, PI_Real.mMSE) # Real data
       idx_Assumed.mMSE <- lapply(1:length(combs),function(j){
         sample(1:n, r2[i]-r1, T, PI_Assumed_Old.mMSE[[j]]) # Assumed data

@@ -1,4 +1,6 @@
 ---
+params:
+  Model_Path:
 title: "OSMAC_Method; Model: `r params$Model_Path`; "
 author: "M.Amalan"
 date: '`r format(Sys.Date(), "%B %d, %Y")`'
