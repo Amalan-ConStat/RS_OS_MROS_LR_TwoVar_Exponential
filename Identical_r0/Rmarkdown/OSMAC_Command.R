@@ -4,7 +4,7 @@ library(rmarkdown)
 Model<-c("Model_1","Model_2",
          "Model_3","Model_4") ; j=1
 
-for (j in 2:length(Model)) 
+for (j in 1:length(Model)) 
 {
   # OSMAC Method ----
   render(input=here("Identical_r0","Rmarkdown","Classical","OSMAC_Method.Rmd"),
