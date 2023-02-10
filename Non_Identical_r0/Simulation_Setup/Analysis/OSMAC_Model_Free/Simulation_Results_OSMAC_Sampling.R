@@ -6,10 +6,10 @@ library(LaplacesDemon)
 enableJIT(1)
 
 # Load the No Correlated Data----
-load(here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","OSMAC_Model_Free","Init.RData"))
+load(here("Non_Identical_r0","Simulation_Setup","Analysis","OSMAC_Model_Free","Init.RData"))
 
 # Load the OSMAC Sample----
-load(here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","OSMAC_Model_Free","Run_OSMAC.RData"))
+load(here("Non_Identical_r0","Simulation_Setup","Analysis","OSMAC_Model_Free","Run_OSMAC.RData"))
 
 All_Covariates<-c("X0","X1","X2","X1^2","X2^2")
 

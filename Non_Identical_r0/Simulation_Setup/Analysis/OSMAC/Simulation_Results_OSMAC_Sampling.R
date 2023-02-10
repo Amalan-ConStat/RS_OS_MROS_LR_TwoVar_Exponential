@@ -6,10 +6,10 @@ library(LaplacesDemon)
 enableJIT(1)
 
 # Load the No Correlated Data----
-load(here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","OSMAC","Init.RData"))
+load(here("Non_Identical_r0","Simulation_Setup","Analysis","OSMAC","Init.RData"))
 
 # Load the OSMAC Sample----
-load(here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","OSMAC","Run_OSMAC.RData"))
+load(here("Non_Identical_r0","Simulation_Setup","Analysis","OSMAC","Run_OSMAC.RData"))
 
 # Real Model ----
 # Generate for Random sample of 1000 different times ---

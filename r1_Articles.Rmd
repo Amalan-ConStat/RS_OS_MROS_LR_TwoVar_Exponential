@@ -27,9 +27,10 @@ library(ggpubr)
 Model_1_SS<-1000
 
 # OSMAC
-load(here("Identical_r0","Summary","Classical","Model_1","Data","Efficiency","No_Correlated_Covariate_OSMAC_r1.RData"))
+load(here("Identical_r0","Summary","Model_1","Data","Efficiency","No_Correlated_Covariate_OSMAC_r1.RData"))
 remove_stuff<-c(paste0("Assumed New ",1:3))
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
+All_MSE_MLE<-All_MSE_MLE[!(All_MSE_MLE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 All_ACC<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
@@ -41,6 +42,7 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
 }
 
@@ -49,17 +51,20 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
 }
 
 OSMAC_Info<-All_Info
 OSMAC_MSE<-All_MSE
+OSMAC_MSE_MLE<-All_MSE_MLE
 OSMAC_ACC<-All_ACC
 
 remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # All elements
 All_MSE<-rbind(OSMAC_MSE[,!(colnames(OSMAC_MSE) %in% "Type")])
+All_MSE_MLE<-rbind(OSMAC_MSE_MLE[,!(colnames(OSMAC_MSE_MLE) %in% "Type")])
 All_Info<-rbind(OSMAC_Info[,!(colnames(OSMAC_Info) %in% "Type")])
 All_ACC<-rbind(OSMAC_ACC[,!(colnames(OSMAC_ACC) %in% "Type")])
 
@@ -68,26 +73,29 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
+colnames(All_MSE_MLE)[3]<-"Estimated Values"
 colnames(All_ACC)[3]<-"Estimated Values"
 
 M1_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="Model Information",
                                         All_Info),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="MSE",
                                         All_MSE),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="MSE for MLE",
+                                        All_MSE_MLE),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082",Metric="Accuracy",
                                         All_ACC))
 
 remove(All_Info,All_MSE,RS_Info,RS_MSE,All_ACC)
-
 ```
 
 ```{r Load data model 2}
 Model_2_SS<-1000
 
 # OSMAC
-load(here("Identical_r0","Summary","Classical","Model_2","Data","Efficiency","No_Correlated_Covariate_OSMAC_r1.RData"))
+load(here("Identical_r0","Summary","Model_2","Data","Efficiency","No_Correlated_Covariate_OSMAC_r1.RData"))
 remove_stuff<-c(paste0("Assumed New ",1:3))
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
+All_MSE_MLE<-All_MSE_MLE[!(All_MSE_MLE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 Accuracy_Data<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
@@ -99,6 +107,7 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & Accuracy_Data$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
 }
 
@@ -107,17 +116,20 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & Accuracy_Data$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
 }
 
 OSMAC_Info<-All_Info
 OSMAC_MSE<-All_MSE
+OSMAC_MSE_MLE<-All_MSE_MLE
 OSMAC_ACC<-Accuracy_Data
 
 remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,Accuracy_Data)
 
 # All elements
 All_MSE<-rbind(OSMAC_MSE[,!(colnames(OSMAC_MSE) %in% "Type")])
+All_MSE_MLE<-rbind(OSMAC_MSE_MLE[,!(colnames(OSMAC_MSE_MLE) %in% "Type")])
 All_Info<-rbind(OSMAC_Info[,!(colnames(OSMAC_Info) %in% "Type")])
 All_ACC<-rbind(OSMAC_ACC[,!(colnames(OSMAC_ACC) %in% "Type")])
 
@@ -126,12 +138,15 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
+colnames(All_MSE_MLE)[3]<-"Estimated Values"
 colnames(All_ACC)[3]<-"Estimated Values"
 
 M2_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="Model Information",
                                         All_Info),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="MSE",
                                         All_MSE),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="MSE for MLE",
+                                        All_MSE_MLE),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",Metric="Accuracy",
                                         All_ACC))
 
@@ -143,9 +158,10 @@ remove(All_Info,All_MSE,RS_Info,RS_MSE,All_ACC)
 Model_3_SS<-1000
 
 # OSMAC
-load(here("Identical_r0","Summary","Classical","Model_3","Data","Efficiency","No_Correlated_Covariate_OSMAC_r1.RData"))
+load(here("Identical_r0","Summary","Model_3","Data","Efficiency","No_Correlated_Covariate_OSMAC_r1.RData"))
 remove_stuff<-c(paste0("Assumed New ",1:3))
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
+All_MSE_MLE<-All_MSE_MLE[!(All_MSE_MLE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 All_ACC<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
@@ -157,6 +173,7 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
 }
 
@@ -165,17 +182,20 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
 }
 
 OSMAC_Info<-All_Info
 OSMAC_MSE<-All_MSE
+OSMAC_MSE_MLE<-All_MSE_MLE
 OSMAC_ACC<-All_ACC
 
 remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,All_ACC)
 
 # All elements
 All_MSE<-rbind(OSMAC_MSE[,!(colnames(OSMAC_MSE) %in% "Type")])
+All_MSE_MLE<-rbind(OSMAC_MSE_MLE[,!(colnames(OSMAC_MSE_MLE) %in% "Type")])
 All_Info<-rbind(OSMAC_Info[,!(colnames(OSMAC_Info) %in% "Type")])
 All_ACC<-rbind(OSMAC_ACC[,!(colnames(OSMAC_ACC) %in% "Type")])
 
@@ -184,12 +204,15 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
+colnames(All_MSE_MLE)[3]<-"Estimated Values"
 colnames(All_ACC)[3]<-"Estimated Values"
 
 M3_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="Model Information",
                                         All_Info),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="MSE",
                                         All_MSE),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="MSE for MLE",
+                                        All_MSE_MLE),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",Metric="Accuracy",
                                         All_ACC))
 
@@ -201,9 +224,10 @@ remove(All_Info,All_MSE,RS_Info,RS_MSE,All_ACC)
 Model_4_SS<-1000
 
 # OSMAC
-load(here("Identical_r0","Summary","Classical","Model_4","Data","Efficiency","No_Correlated_Covariate_OSMAC_r1.RData"))
+load(here("Identical_r0","Summary","Model_4","Data","Efficiency","No_Correlated_Covariate_OSMAC_r1.RData"))
 remove_stuff<-c(paste0("Assumed New ",1:3))
 All_MSE<-All_MSE[!(All_MSE$Model %in% remove_stuff),]
+All_MSE_MLE<-All_MSE_MLE[!(All_MSE_MLE$Model %in% remove_stuff),]
 All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 All_ACC<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
@@ -215,6 +239,7 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
   All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mMSE"] <-paste0("mMSE ",New_Labels[i])
 }
 
@@ -223,17 +248,20 @@ for (i in 1:length(Old_Labels))
 {
   All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
   All_ACC$Model[All_ACC$Model==Old_Labels[i] & All_ACC$Type == "mVc"] <-paste0("mVc ",New_Labels[i])
 }
 
 OSMAC_Info<-All_Info
 OSMAC_MSE<-All_MSE
+OSMAC_MSE_MLE<-All_MSE_MLE
 OSMAC_ACC<-All_ACC
 
 remove(All_Bias,All_EMSE,All_MSE,All_Info,All_VAR,All_ACC)
 
 # All elements
 All_MSE<-rbind(OSMAC_MSE[,!(colnames(OSMAC_MSE) %in% "Type")])
+All_MSE_MLE<-rbind(OSMAC_MSE_MLE[,!(colnames(OSMAC_MSE_MLE) %in% "Type")])
 All_Info<-rbind(OSMAC_Info[,!(colnames(OSMAC_Info) %in% "Type")])
 All_ACC<-rbind(OSMAC_ACC[,!(colnames(OSMAC_ACC) %in% "Type")])
 
@@ -242,12 +270,15 @@ remove(list = All_Objects[startsWith(All_Objects,"OSMAC")])
 
 colnames(All_Info)[3]<-"Estimated Values"
 colnames(All_MSE)[3]<-"Estimated Values"
+colnames(All_MSE_MLE)[3]<-"Estimated Values"
 colnames(All_ACC)[3]<-"Estimated Values"
 
 M4_Identical_r0<-rbind(cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
                                         Metric="Model Information",All_Info),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
                                         Metric="MSE",All_MSE),
+                       cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
+                                        Metric="MSE for MLE",All_MSE_MLE),
                        cbind.data.frame(Covariate="Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2",
                                         Metric="Accuracy",All_ACC))
 
@@ -301,8 +332,7 @@ Selected_Models_mVc<-c("Optimal subsampling mVc: Data Model",
                        "Optimal subsampling mVc: Incorrect Model 3",
                        "Model Robust subsampling mVc: Data Model")
 
-# Colors_mVc<-Colors_mVc<-c("#88CCEE",#"#A6C3D3","#5D92B0","#35586C", 
-#                           "#FFC4D8","#E28490","#BB2C3E","#55141C", 
+# Colors_mVc<-Colors_mVc<-c("#FFC4D8","#E28490","#BB2C3E","#55141C", 
 #                           "#DDCC77")
 
 Colors_mVc<-c("#cc0000", 
@@ -322,6 +352,8 @@ Theme_special<-function()
         legend.box.margin=margin(-1,-2,-1,-2)) 
 }
 
+#Identical_ro<-Identical_ro[Identical_ro$Subsample_Size %in% seq(100,1000,100),]
+
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
   ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
@@ -329,7 +361,7 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab(paste0(expression(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("Average Model Information")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+guides(colour = guide_legend(nrow = 2))+Theme_special()->Temp_plot_mMSE
@@ -343,7 +375,7 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab(paste0(expression(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("Average Model Information")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+guides(colour = guide_legend(nrow = 2))+Theme_special()->Temp_plot_mVc
@@ -357,8 +389,8 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(paste0(expression(r[0],' + ',r[1],'=1000 and ',r[0])))+
-  ylab("log(Average Model Information)")+#
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  ylab("log(Average Model Information)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p1
 
@@ -369,7 +401,7 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(paste0(expression(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(Average Model Information)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p2
@@ -381,7 +413,7 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(paste0(expression(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(SMSE)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p3
@@ -394,7 +426,7 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(paste0(expression(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(SMSE)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p4
@@ -406,7 +438,7 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(paste0(expression(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("Accuracy of Y")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p5
@@ -419,15 +451,43 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   geom_point(size=1.75)+geom_line(size=1)+
   scale_color_manual(values=Colors_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(paste0(expression(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("Accuracy of Y")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p6
+
+Identical_ro[Identical_ro$Metric=="MSE for MLE" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model))+
+  scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
+                     breaks = unique(Identical_ro$Subsample_Size))+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mMSE)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  ylab("log(SMSE)")+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
+  theme_bw()+Theme_special()->p7
+
+
+Identical_ro[Identical_ro$Metric=="MSE for MLE" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model))+
+  scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
+                     breaks = unique(Identical_ro$Subsample_Size))+
+  geom_point(size=1.75)+geom_line(size=1)+
+  scale_color_manual(values=Colors_mVc)+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
+  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  ylab("log(SMSE)")+
+  scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
+  theme_bw()+Theme_special()->p8
 
 ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto")
 ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom",labels = "auto")
 ggarrange(p5,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom")
 ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom")
+
+ggarrange(p7,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom")
+ggarrange(p8,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom")
 
 ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto") %>%
   ggexport(filename = "r1_SMSE_MI_LR_TV_Exp_mMSE.pdf",res=300,width = 12,height = 16)
@@ -437,7 +497,10 @@ ggarrange(p5,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom")
   ggexport(filename = "r1_ACCURACY_LR_TV_Exp_mMSE.pdf",res=300,width = 12,height = 12)
 ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
   ggexport(filename = "r1_ACCURACY_LR_TV_Exp_mVc.pdf",res=300,width = 12,height = 12)
-
+ggarrange(p7,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
+  ggexport(filename = "r1_SMSE_for_MLE_MI_LR_TV_Exp_mMSE.pdf",res=300,width = 12,height = 12)
+ggarrange(p8,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
+  ggexport(filename = "r1_SMSE_for_MLE_MI_LR_TV_Exp_mVc.pdf",res=300,width = 12,height = 12)
 
 ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto") %>%
   ggsave(filename = "r1_SMSE_MI_LR_TV_Exp_mMSE.eps",device="eps",dpi=300,width = 12,height = 16)
@@ -447,4 +510,8 @@ ggarrange(p5,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom")
   ggsave(filename = "r1_ACCURACY_LR_TV_Exp_mMSE.eps",device="eps",dpi=300,width = 12,height = 12)
 ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
   ggsave(filename = "r1_ACCURACY_LR_TV_Exp_mVc.eps",device="eps",dpi=300,width = 12,height = 12)
+ggarrange(p7,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
+  ggexport(filename = "r1_SMSE_for_MLE_MI_LR_TV_Exp_mMSE.eps",res=300,width = 12,height = 12)
+ggarrange(p8,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
+  ggexport(filename = "r1_SMSE_for_MLE_MI_LR_TV_Exp_mVc.eps",res=300,width = 12,height = 12)
 ```

@@ -6,10 +6,10 @@ library(LaplacesDemon)
 enableJIT(1)
 
 # Load the No Correlated Data----
-load(here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","Random_Sampling","Init.RData"))
+load(here("Non_Identical_r0","Simulation_Setup","Analysis","Random_Sampling","Init.RData"))
 
 # Load the Random Sample----
-load(here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","Random_Sampling","Run_RandomSample.RData"))
+load(here("Non_Identical_r0","Simulation_Setup","Analysis","Random_Sampling","Run_RandomSample.RData"))
 
 # Real Model ----
 # Generate for Random sample of 1000 different times
@@ -26,11 +26,11 @@ Bias_RandomSample<-Final_Parameter$Bias[[1]]
 
 # Save the Results ----
 save(Est_Param_RandomSample,Utility_RandomSample,Bias_RandomSample,#SelectedData_RandomSample,
-     file = here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","Random_Sampling",
+     file = here("Non_Identical_r0","Simulation_Setup","Analysis","Random_Sampling",
                  "Results","Real_Model","Random_Sample_output.RData"))
 
 save(Est_Param_RandomSample,Utility_RandomSample,Bias_RandomSample,#SelectedData_RandomSample,
-     file = here("Non_Identical_r0","Outputs","Classical",Model_Path,"Random_Sampling",
+     file = here("Non_Identical_r0","Outputs",Model_Path,"Random_Sampling",
                  "Real_Model","Random_Sample_output.RData"))
 
 # Assumed Model 1----
@@ -42,11 +42,11 @@ Bias_RandomSample<-Final_Parameter$Bias[[2]]
 
 # Save the Results ---
 save(Est_Param_RandomSample,Utility_RandomSample,Bias_RandomSample,#SelectedData_RandomSample,
-     file = here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","Random_Sampling",
+     file = here("Non_Identical_r0","Simulation_Setup","Analysis","Random_Sampling",
                  "Results","Assumed_Model_1","Random_Sample_output.RData"))
 
 save(Est_Param_RandomSample,Utility_RandomSample,Bias_RandomSample,#SelectedData_RandomSample,
-     file = here("Non_Identical_r0","Outputs","Classical",Model_Path,"Random_Sampling",
+     file = here("Non_Identical_r0","Outputs",Model_Path,"Random_Sampling",
                  "Assumed_Model_1","Random_Sample_output.RData"))
 
 # Assumed Model 2----
@@ -58,11 +58,11 @@ Bias_RandomSample<-Final_Parameter$Bias[[3]]
 
 # Save the Results ---
 save(Est_Param_RandomSample,Utility_RandomSample,Bias_RandomSample,#SelectedData_RandomSample,
-     file = here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","Random_Sampling",
+     file = here("Non_Identical_r0","Simulation_Setup","Analysis","Random_Sampling",
                  "Results","Assumed_Model_2","Random_Sample_output.RData"))
 
 save(Est_Param_RandomSample,Utility_RandomSample,Bias_RandomSample,#SelectedData_RandomSample,
-     file = here("Non_Identical_r0","Outputs","Classical",Model_Path,"Random_Sampling",
+     file = here("Non_Identical_r0","Outputs",Model_Path,"Random_Sampling",
                  "Assumed_Model_2","Random_Sample_output.RData"))
 
 # Assumed Model 3----
@@ -74,9 +74,9 @@ Bias_RandomSample<-Final_Parameter$Bias[[4]]
 
 # Save the Results ---
 save(Est_Param_RandomSample,Utility_RandomSample,Bias_RandomSample,#SelectedData_RandomSample,
-     file = here("Non_Identical_r0","Simulation_Setup","Classical","Analysis","Random_Sampling",
+     file = here("Non_Identical_r0","Simulation_Setup","Analysis","Random_Sampling",
                  "Results","Assumed_Model_3","Random_Sample_output.RData"))
 
 save(Est_Param_RandomSample,Utility_RandomSample,Bias_RandomSample,#SelectedData_RandomSample,
-     file = here("Non_Identical_r0","Outputs","Classical",Model_Path,"Random_Sampling",
+     file = here("Non_Identical_r0","Outputs",Model_Path,"Random_Sampling",
                  "Assumed_Model_3","Random_Sample_output.RData"))
