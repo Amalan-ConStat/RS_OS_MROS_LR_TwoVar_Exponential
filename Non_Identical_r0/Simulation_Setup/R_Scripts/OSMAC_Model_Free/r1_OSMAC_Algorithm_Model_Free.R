@@ -78,9 +78,8 @@ OSMAC_MF <- function(r1,r2,Y,X,n,alpha,combs,All_Covariates) {
     pinv.prop <- n
     pinv.prop <- 1/PI.prop[idx.prop]
     
-    beta.prop<-list()
-    beta.prop<-lapply(1:length(combs),function(j) {
-      getMLE(x=X[idx.prop,colnames(X) %in% combs[[j]]  ], y=y.prop, w=pinv.prop)})
+    beta.prop<-lapply(1:length(combs),function(a) {
+      getMLE(x=X[idx.prop,colnames(X) %in% combs[[a]]  ], y=y.prop, w=pinv.prop)})
     
     for (j in 1:length(combs)) 
     {
@@ -90,12 +89,12 @@ OSMAC_MF <- function(r1,r2,Y,X,n,alpha,combs,All_Covariates) {
       }
     }
     
-    P.prop<-lapply(1:length(combs), function(j)
-      1 - 1 / (1 + exp(X[,colnames(X) %in% combs[[j]]] %*% beta.prop[[j]]$par)))
+    P.prop<-lapply(1:length(combs), function(a)
+      1 - 1 / (1 + exp(X[,colnames(X) %in% combs[[a]]] %*% beta.prop[[a]]$par)))
   
     ## mVC
-    PI.mVc<-lapply(1:length(combs),function(j){
-      PI.mVc <- sqrt((Y - P.prop[[j]])^2 * rowSums(X[,All_Covariates %in% combs[[j]] ]^2)) #
+    PI.mVc<-lapply(1:length(combs),function(a){
+      PI.mVc <- sqrt((Y - P.prop[[a]])^2 * rowSums(X[,All_Covariates %in% combs[[a]] ]^2)) #
       return(PI.mVc / sum(PI.mVc))})
     
     PI.mVc<-matrix(unlist(PI.mVc),nrow = n,byrow = FALSE)

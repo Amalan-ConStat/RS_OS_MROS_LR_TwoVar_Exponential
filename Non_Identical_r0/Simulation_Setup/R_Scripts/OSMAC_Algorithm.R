@@ -76,7 +76,7 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,Real_Data,n,Model) {
     #Sample.mMSE<-list()
     #Sample.mVc<-list()
     
-    ## mVC
+    ## mVc
     PI.mVc <- sqrt((Y - P.prop)^2 * rowSums(X^2))
     PI.mVc <- PI.mVc / sum(PI.mVc)
     
