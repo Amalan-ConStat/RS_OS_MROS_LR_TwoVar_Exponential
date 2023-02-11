@@ -52,24 +52,24 @@ New_Labels<-c("RM",paste0("AM ",1:3),"MF")
 for (i in 1:length(Old_Labels)) 
 {
   All_Bias$Model[All_Bias$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_EMSE$Model[All_EMSE$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_Info$Model[All_Info$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_EMSE$Model[All_EMSE$Model==Old_Labels[i] & All_EMSE$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_VAR$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & Accuracy_Data$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
 }
 
 ## mVc
 for (i in 1:length(Old_Labels)) 
 {
   All_Bias$Model[All_Bias$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_EMSE$Model[All_EMSE$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_Info$Model[All_Info$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_EMSE$Model[All_EMSE$Model==Old_Labels[i] & All_EMSE$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_VAR$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & Accuracy_Data$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
 }
 
 OSMAC_mMSE_Bias<-All_Bias[All_Bias$Type == "mMSE",] 
@@ -141,12 +141,12 @@ load(here("Non_Identical_r0","Summary",params$Model_Path,"Data","Efficiency",
 for (i in 1:length(Old_Labels)) 
 {
   All_Bias$Model[All_Bias$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_EMSE$Model[All_EMSE$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_Info$Model[All_Info$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
-  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & All_Bias$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_EMSE$Model[All_EMSE$Model==Old_Labels[i] & All_EMSE$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_VAR$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & Accuracy_Data$Type == "mMSE"] <-paste0("OSMAC mMSE ",New_Labels[i])
 }
 
 OSMAC_mMSE_Bias<-All_Bias[All_Bias$Type == "mMSE",] 
@@ -161,12 +161,12 @@ OSMAC_mMSE_ACC<-Accuracy_Data[Accuracy_Data$Type == "mMSE",]
 for (i in 1:length(Old_Labels)) 
 {
   All_Bias$Model[All_Bias$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_EMSE$Model[All_EMSE$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_Info$Model[All_Info$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
-  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & All_Bias$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_EMSE$Model[All_EMSE$Model==Old_Labels[i] & All_EMSE$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_Info$Model[All_Info$Model==Old_Labels[i] & All_Info$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_MSE$Model[All_MSE$Model==Old_Labels[i] & All_MSE$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_MSE_MLE$Model[All_MSE_MLE$Model==Old_Labels[i] & All_MSE_MLE$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  All_VAR$Model[All_VAR$Model==Old_Labels[i] & All_VAR$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
+  Accuracy_Data$Model[Accuracy_Data$Model==Old_Labels[i] & Accuracy_Data$Type == "mVc"] <-paste0("OSMAC mVc ",New_Labels[i])
 }
 
 OSMAC_mVc_Bias<-All_Bias[All_Bias$Type == "mVc",] 

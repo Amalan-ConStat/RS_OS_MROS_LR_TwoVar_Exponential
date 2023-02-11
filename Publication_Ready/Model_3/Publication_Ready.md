@@ -1,7 +1,7 @@
 Publication Ready
 ================
 Amalan
-February 10, 2023
+February 11, 2023
 
 # Using Exponential Distribution for Data
 
