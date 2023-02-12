@@ -630,28 +630,28 @@ ggarrange(p7,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom")
 ggarrange(p8,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom")
 
 ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto") %>%
-  ggexport(filename = "SMSE_MI_LR_TV_Exp_mMSE.pdf",res=300,width = 12,height = 16)
+  ggexport(filename = here("Article_Plots","SMSE_MI_LR_TV_Exp_mMSE.pdf"),res=300,width = 12,height = 16)
 ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom",labels = "auto") %>%
-  ggexport(filename = "SMSE_MI_LR_TV_Exp_mVc.pdf",res=300,width = 12,height = 16)
+  ggexport(filename = here("Article_Plots","SMSE_MI_LR_TV_Exp_mVc.pdf"),res=300,width = 12,height = 16)
 ggarrange(p5,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
-  ggexport(filename = "ACCURACY_LR_TV_Exp_mMSE.pdf",res=300,width = 12,height = 12)
+  ggexport(filename = here("Article_Plots","ACCURACY_LR_TV_Exp_mMSE.pdf"),res=300,width = 12,height = 12)
 ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
-  ggexport(filename = "ACCURACY_LR_TV_Exp_mVc.pdf",res=300,width = 12,height = 12)
+  ggexport(filename = here("Article_Plots","ACCURACY_LR_TV_Exp_mVc.pdf"),res=300,width = 12,height = 12)
 ggarrange(p7,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
-  ggexport(filename = "SMSE_for_MLE_MI_LR_TV_Exp_mMSE.pdf",res=300,width = 12,height = 12)
+  ggexport(filename = here("Article_Plots","SMSE_for_MLE_MI_LR_TV_Exp_mMSE.pdf"),res=300,width = 12,height = 12)
 ggarrange(p8,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
-  ggexport(filename = "SMSE_for_MLE_MI_LR_TV_Exp_mVc.pdf",res=300,width = 12,height = 12)
+  ggexport(filename = here("Article_Plots","SMSE_for_MLE_MI_LR_TV_Exp_mVc.pdf"),res=300,width = 12,height = 12)
 
 ggarrange(p1,p3,nrow = 2,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom",labels = "auto") %>%
-  ggsave(filename = "SMSE_MI_LR_TV_Exp_mMSE.eps",device="eps",dpi=300,width = 12,height = 16)
+  ggsave(filename = here("Article_Plots","SMSE_MI_LR_TV_Exp_mMSE.eps"),device="eps",dpi=300,width = 12,height = 16)
 ggarrange(p2,p4,nrow = 2,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom",labels = "auto") %>% 
-  ggsave(filename = "SMSE_MI_LR_TV_Exp_mVc.eps",device="eps",dpi=300,width = 12,height = 16)
+  ggsave(filename = here("Article_Plots","SMSE_MI_LR_TV_Exp_mVc.eps"),device="eps",dpi=300,width = 12,height = 16)
 ggarrange(p5,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
-  ggsave(filename = "ACCURACY_LR_TV_Exp_mMSE.eps",device="eps",dpi=300,width = 12,height = 12)
+  ggsave(filename = here("Article_Plots","ACCURACY_LR_TV_Exp_mMSE.eps"),device="eps",dpi=300,width = 12,height = 12)
 ggarrange(p6,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
-  ggsave(filename = "ACCURACY_LR_TV_Exp_mVc.eps",device="eps",dpi=300,width = 12,height = 12)
+  ggsave(filename = here("Article_Plots","ACCURACY_LR_TV_Exp_mVc.eps"),device="eps",dpi=300,width = 12,height = 12)
 ggarrange(p7,nrow = 1,ncol = 1,legend.grob = Temp_legend_mMSE,legend = "bottom") %>%
-  ggexport(filename = "SMSE_for_MLE_MI_LR_TV_Exp_mMSE.eps",res=300,width = 12,height = 12)
+  ggexport(filename = here("Article_Plots","SMSE_for_MLE_MI_LR_TV_Exp_mMSE.eps"),res=300,width = 12,height = 12)
 ggarrange(p8,nrow = 1,ncol = 1,legend.grob = Temp_legend_mVc,legend = "bottom") %>%
-  ggexport(filename = "SMSE_for_MLE_MI_LR_TV_Exp_mVc.eps",res=300,width = 12,height = 12)
+  ggexport(filename = here("Article_Plots","SMSE_for_MLE_MI_LR_TV_Exp_mVc.eps"),res=300,width = 12,height = 12)
 ```
