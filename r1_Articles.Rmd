@@ -35,7 +35,7 @@ All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 All_ACC<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
-New_Labels<-c("DM",paste0("AM ",1:3),"MR")
+New_Labels<-c("DM",paste0("AM ",1:2),"CM","MR")
 
 ## mMSE
 for (i in 1:length(Old_Labels)) 
@@ -100,7 +100,7 @@ All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 Accuracy_Data<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
-New_Labels<-c("DM",paste0("AM ",1:3),"MR")
+New_Labels<-c("DM",paste0("AM ",1:2),"CM","MR")
 
 ## mMSE
 for (i in 1:length(Old_Labels)) 
@@ -166,7 +166,7 @@ All_Info<-All_Info[!(All_Info$Model %in% remove_stuff),]
 All_ACC<-Accuracy_Data[!(Accuracy_Data$Model %in% remove_stuff),]
 
 Old_Labels<-c("Real",paste0("Assumed Old ",1:3),"Model Free")
-New_Labels<-c("DM",paste0("AM ",1:3),"MR")
+New_Labels<-c("DM",paste0("AM ",1:2),"CM","MR")
 
 ## mMSE
 for (i in 1:length(Old_Labels)) 
@@ -297,8 +297,8 @@ Identical_ro$Covariate<-factor(Identical_ro$Covariate,
                                           "Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2"))
 
 Identical_ro$Model<-factor(Identical_ro$Model,
-                           levels = c("mMSE DM","mMSE AM 1","mMSE AM 2","mMSE AM 3",
-                                      "mVc DM","mVc AM 1","mVc AM 2","mVc AM 3",
+                           levels = c("mMSE DM","mMSE AM 1","mMSE AM 2","mMSE AM 3","mMSE CM",
+                                      "mVc DM","mVc AM 1","mVc AM 2","mVc AM 3","mVc CM",
                                       "mMSE MR","mVc MR"))
 
 Identical_ro$Model<-recode_factor(Identical_ro$Model,
@@ -306,10 +306,12 @@ Identical_ro$Model<-recode_factor(Identical_ro$Model,
                                   `mMSE AM 1`="Optimal subsampling mMSE: Incorrect Model 1",
                                   `mMSE AM 2`="Optimal subsampling mMSE: Incorrect Model 2",
                                   `mMSE AM 3`="Optimal subsampling mMSE: Incorrect Model 3",
+                                  `mMSE CM` = "Optimal subsampling mMSE: Complex Model",
                                   `mVc DM`="Optimal subsampling mVc: Data Model",
                                   `mVc AM 1`="Optimal subsampling mVc: Incorrect Model 1",
                                   `mVc AM 2`="Optimal subsampling mVc: Incorrect Model 2",
                                   `mVc AM 3`="Optimal subsampling mVc: Incorrect Model 3",
+                                  `mVc CM`="Optimal subsampling mVc: Complex Model",
                                   `mMSE MR`="Model Robust subsampling mMSE: Data Model",
                                   `mVc MR`="Model Robust subsampling mVc: Data Model")
 
@@ -317,35 +319,45 @@ Selected_Models_mMSE<-c("Optimal subsampling mMSE: Data Model",
                         "Optimal subsampling mMSE: Incorrect Model 1",
                         "Optimal subsampling mMSE: Incorrect Model 2",
                         "Optimal subsampling mMSE: Incorrect Model 3",
+                        "Optimal subsampling mMSE: Complex Model",
                         "Model Robust subsampling mMSE: Data Model")
 
 # Colors_mMSE<-c("#FFC4D8","#E28490","#BB2C3E","#55141C",
 #                "#DDCC77")
 
 Colors_mMSE<-c("#cc0000", 
-               "#ff578a","#ff578a","#ff578a",
+               "#ff578a","#ff578a","#ff578a","#603BDE",
                "darkgreen")
 
 LineType_mMSE<-c("dashed",
-                 "dotted","dotted","dotted",
+                 "dotted","dotted","dotted","dotdash",
                  "solid")
+
+ShapeType_mMSE<-c(1,
+                  4,4,4,3,
+                  8)
 
 Selected_Models_mVc<-c("Optimal subsampling mVc: Data Model",
                        "Optimal subsampling mVc: Incorrect Model 1",
                        "Optimal subsampling mVc: Incorrect Model 2",
                        "Optimal subsampling mVc: Incorrect Model 3",
+                       "Optimal subsampling mVc: Complex Model",
                        "Model Robust subsampling mVc: Data Model")
 
 # Colors_mVc<-Colors_mVc<-c("#FFC4D8","#E28490","#BB2C3E","#55141C", 
 #                           "#DDCC77")
 
 Colors_mVc<-c("#cc0000", 
-              "#ff578a","#ff578a","#ff578a",
+              "#ff578a","#ff578a","#ff578a","#603BDE",
               "darkgreen")
 
 LineType_mVc<-c("dashed",
-                "dotted","dotted","dotted",
+                "dotted","dotted","dotted","dotdash",
                 "solid")
+
+ShapeType_mVc<-c(1,
+                 4,4,4,3,
+                 8)
 
 Theme_special<-function()
 {
@@ -358,50 +370,51 @@ Theme_special<-function()
         legend.position = "bottom",
         legend.margin=margin(0,0,0,0),
         legend.box.margin=margin(-1,-2,-1,-2),
-        legend.key.width=unit(1.2,"cm"))
+        legend.key.width=unit(1,"cm"))
 }
 
 #Identical_ro<-Identical_ro[Identical_ro$Subsample_Size %in% seq(100,1000,100),]
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  #geom_point(size=1.75)+
-  geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
+  scale_shape_manual(values = ShapeType_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("Average Model Information")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+guides(colour = guide_legend(nrow = 2))+Theme_special()->Temp_plot_mMSE
+  theme_bw()+guides(colour = guide_legend(nrow = 3))+Theme_special()->Temp_plot_mMSE
 
 Temp_legend_mMSE<-get_legend(Temp_plot_mMSE)
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  #geom_point(size=1.75)+
-  geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
+  scale_shape_manual(values = ShapeType_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("Average Model Information")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
-  theme_bw()+guides(colour = guide_legend(nrow = 2))+Theme_special()->Temp_plot_mVc
+  theme_bw()+guides(colour = guide_legend(nrow = 3))+Theme_special()->Temp_plot_mVc
 
 Temp_legend_mVc<-get_legend(Temp_plot_mVc)
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
+  scale_shape_manual(values = ShapeType_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(Average Model Information)")+
@@ -409,12 +422,13 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   theme_bw()+Theme_special()->p1
 
 Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
+  scale_shape_manual(values = ShapeType_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(Average Model Information)")+
@@ -422,12 +436,13 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   theme_bw()+Theme_special()->p2
   
 Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
+  scale_shape_manual(values = ShapeType_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(SMSE)")+
@@ -436,12 +451,13 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
 
 
 Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
+  scale_shape_manual(values = ShapeType_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(SMSE)")+
@@ -449,12 +465,13 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   theme_bw()+Theme_special()->p4
 
 Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
+  scale_shape_manual(values = ShapeType_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("Accuracy of Y")+
@@ -463,12 +480,13 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
 
 
 Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=`Estimated Values`,color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
+  scale_shape_manual(values = ShapeType_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("Accuracy of Y")+
@@ -476,12 +494,13 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   theme_bw()+Theme_special()->p6
 
 Identical_ro[Identical_ro$Metric=="MSE for MLE" & Identical_ro$Model %in% Selected_Models_mMSE,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
+  scale_shape_manual(values = ShapeType_mMSE)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(SMSE)")+
@@ -490,12 +509,13 @@ Identical_ro[Identical_ro$Metric=="MSE for MLE" & Identical_ro$Model %in% Select
 
 
 Identical_ro[Identical_ro$Metric=="MSE for MLE" & Identical_ro$Model %in% Selected_Models_mVc,] %>%
-  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model))+
+  ggplot(.,aes(x=Subsample_Size,y=log(`Estimated Values`),color=Model,linetype=Model,shape=Model))+
   scale_x_continuous(labels = unique(Identical_ro$Subsample_Size),
                      breaks = unique(Identical_ro$Subsample_Size))+
-  geom_point(size=1.75)+geom_line(size=1)+
+  geom_point(size=1.25)+geom_line(size=0.75)+
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
+  scale_shape_manual(values = ShapeType_mVc)+
   facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
   xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
   ylab("log(SMSE)")+
