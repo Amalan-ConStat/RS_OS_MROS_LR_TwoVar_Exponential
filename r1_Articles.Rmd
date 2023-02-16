@@ -294,7 +294,11 @@ Identical_ro$Covariate<-factor(Identical_ro$Covariate,
                                levels = c("Data Model: x\u2081, x\u2082",
                                           "Data Model: x\u2081, x\u2082, (x\u2081)\u00B2",
                                           "Data Model: x\u2081, x\u2082, (x\u2082)\u00B2",
-                                          "Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2"))
+                                          "Data Model: x\u2081, x\u2082, (x\u2081)\u00B2, (x\u2082)\u00B2"),
+                               labels = c(expression("Data Model: "*X[1]*", "*X[2]),
+                                          expression("Data Model: "*X[1]*", "*X[2]*", "*X[1]^{2}),
+                                          expression("Data Model: "*X[1]*", "*X[2]*", "*X[2]^{2}),
+                                          expression("Data Model: "*X[1]*", "*X[2]*", "*X[1]^{2}*", "*X[2]^{2})))
 
 Identical_ro$Model<-factor(Identical_ro$Model,
                            levels = c("mMSE DM","mMSE AM 1","mMSE AM 2","mMSE AM 3","mMSE CM",
@@ -383,8 +387,8 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
   scale_shape_manual(values = ShapeType_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 4,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("Average Model Information")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+guides(colour = guide_legend(nrow = 3))+Theme_special()->Temp_plot_mMSE
@@ -399,8 +403,8 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
   scale_shape_manual(values = ShapeType_mVc)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 4)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 4,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("Average Model Information")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+guides(colour = guide_legend(nrow = 3))+Theme_special()->Temp_plot_mVc
@@ -415,8 +419,8 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
   scale_shape_manual(values = ShapeType_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("log(Average Model Information)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p1
@@ -429,8 +433,8 @@ Identical_ro[Identical_ro$Metric=="Model Information" & Identical_ro$Model %in% 
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
   scale_shape_manual(values = ShapeType_mVc)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("log(Average Model Information)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p2
@@ -443,8 +447,8 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
   scale_shape_manual(values = ShapeType_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("log(SMSE)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p3
@@ -458,8 +462,8 @@ Identical_ro[Identical_ro$Metric=="MSE" & Identical_ro$Model %in% Selected_Model
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
   scale_shape_manual(values = ShapeType_mVc)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("log(SMSE)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p4
@@ -472,8 +476,8 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
   scale_shape_manual(values = ShapeType_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("Accuracy of Y")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p5
@@ -487,8 +491,8 @@ Identical_ro[Identical_ro$Metric=="Accuracy" & Identical_ro$Model %in% Selected_
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
   scale_shape_manual(values = ShapeType_mVc)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("Accuracy of Y")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p6
@@ -501,8 +505,8 @@ Identical_ro[Identical_ro$Metric=="MSE for MLE" & Identical_ro$Model %in% Select
   scale_color_manual(values=Colors_mMSE)+
   scale_linetype_manual(values=LineType_mMSE)+
   scale_shape_manual(values = ShapeType_mMSE)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("log(SMSE)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p7
@@ -516,8 +520,8 @@ Identical_ro[Identical_ro$Metric=="MSE for MLE" & Identical_ro$Model %in% Select
   scale_color_manual(values=Colors_mVc)+
   scale_linetype_manual(values=LineType_mVc)+
   scale_shape_manual(values = ShapeType_mVc)+
-  facet_wrap(~Covariate,scales = "free_y",ncol = 2)+
-  xlab(expression(paste(r[0],' + ',r[1],'=1000 and ',r[0])))+
+  facet_wrap(~Covariate,scales = "free_y",ncol = 2,labeller = label_parsed)+
+  xlab(expression(paste(r[0],'+ r = 1000 and ',r[0])))+
   ylab("log(SMSE)")+
   scale_y_continuous(breaks = scales::pretty_breaks(n = length(unique(Identical_ro$Subsample_Size))/2))+
   theme_bw()+Theme_special()->p8
