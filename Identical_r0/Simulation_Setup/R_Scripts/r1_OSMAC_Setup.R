@@ -90,18 +90,18 @@ Run_OSMAC<-function(Replicates,r1,r2,Y,X,Real_Data,N,alpha,combs,All_Covariates)
       
       Bias_Assumed_Old_mMSE_1[[i]]<-Results$opt$opt_Old$opt_Old_1$Bias_mMSE
       Bias_Assumed_Old_mVc_1[[i]]<-Results$opt$opt_Old$opt_Old_1$Bias_mVc
-      Bias_Assumed_New_mMSE_1[[i]]<-Results$opt$opt_Old$opt_Old_1$Bias_mMSE
-      Bias_Assumed_New_mVc_1[[i]]<-Results$opt$opt_Old$opt_Old_1$Bias_mVc
+      Bias_Assumed_New_mMSE_1[[i]]<-Results$opt$opt_New$opt_New_1$Bias_mMSE
+      Bias_Assumed_New_mVc_1[[i]]<-Results$opt$opt_New$opt_New_1$Bias_mVc
       
       Bias_Assumed_Old_mMSE_2[[i]]<-Results$opt$opt_Old$opt_Old_2$Bias_mMSE
       Bias_Assumed_Old_mVc_2[[i]]<-Results$opt$opt_Old$opt_Old_2$Bias_mVc
-      Bias_Assumed_New_mMSE_2[[i]]<-Results$opt$opt_Old$opt_Old_2$Bias_mMSE
-      Bias_Assumed_New_mVc_2[[i]]<-Results$opt$opt_Old$opt_Old_2$Bias_mVc
+      Bias_Assumed_New_mMSE_2[[i]]<-Results$opt$opt_New$opt_New_2$Bias_mMSE
+      Bias_Assumed_New_mVc_2[[i]]<-Results$opt$opt_New$opt_New_2$Bias_mVc
       
       Bias_Assumed_Old_mMSE_3[[i]]<-Results$opt$opt_Old$opt_Old_3$Bias_mMSE
       Bias_Assumed_Old_mVc_3[[i]]<-Results$opt$opt_Old$opt_Old_3$Bias_mVc
-      Bias_Assumed_New_mMSE_3[[i]]<-Results$opt$opt_Old$opt_Old_3$Bias_mMSE
-      Bias_Assumed_New_mVc_3[[i]]<-Results$opt$opt_Old$opt_Old_3$Bias_mVc
+      Bias_Assumed_New_mMSE_3[[i]]<-Results$opt$opt_New$opt_New_3$Bias_mMSE
+      Bias_Assumed_New_mVc_3[[i]]<-Results$opt$opt_New$opt_New_3$Bias_mVc
      
       Utility_Real_mMSE[[i]]<-Results$opt$opt_Real$Utility_mMSE
       Utility_Real_mVc[[i]]<-Results$opt$opt_Real$Utility_mVc
@@ -110,18 +110,18 @@ Run_OSMAC<-function(Replicates,r1,r2,Y,X,Real_Data,N,alpha,combs,All_Covariates)
       
       Utility_Assumed_Old_mMSE_1[[i]]<-Results$opt$opt_Old$opt_Old_1$Utility_mMSE
       Utility_Assumed_Old_mVc_1[[i]]<-Results$opt$opt_Old$opt_Old_1$Utility_mVc
-      Utility_Assumed_New_mMSE_1[[i]]<-Results$opt$opt_Old$opt_Old_1$Utility_mMSE
-      Utility_Assumed_New_mVc_1[[i]]<-Results$opt$opt_Old$opt_Old_1$Utility_mVc
+      Utility_Assumed_New_mMSE_1[[i]]<-Results$opt$opt_New$opt_New_1$Utility_mMSE
+      Utility_Assumed_New_mVc_1[[i]]<-Results$opt$opt_New$opt_New_1$Utility_mVc
       
       Utility_Assumed_Old_mMSE_2[[i]]<-Results$opt$opt_Old$opt_Old_2$Utility_mMSE
       Utility_Assumed_Old_mVc_2[[i]]<-Results$opt$opt_Old$opt_Old_2$Utility_mVc
-      Utility_Assumed_New_mMSE_2[[i]]<-Results$opt$opt_Old$opt_Old_2$Utility_mMSE
-      Utility_Assumed_New_mVc_2[[i]]<-Results$opt$opt_Old$opt_Old_2$Utility_mVc
+      Utility_Assumed_New_mMSE_2[[i]]<-Results$opt$opt_New$opt_New_2$Utility_mMSE
+      Utility_Assumed_New_mVc_2[[i]]<-Results$opt$opt_New$opt_New_2$Utility_mVc
       
       Utility_Assumed_Old_mMSE_3[[i]]<-Results$opt$opt_Old$opt_Old_3$Utility_mMSE
       Utility_Assumed_Old_mVc_3[[i]]<-Results$opt$opt_Old$opt_Old_3$Utility_mVc
-      Utility_Assumed_New_mMSE_3[[i]]<-Results$opt$opt_Old$opt_Old_3$Utility_mMSE
-      Utility_Assumed_New_mVc_3[[i]]<-Results$opt$opt_Old$opt_Old_3$Utility_mVc
+      Utility_Assumed_New_mMSE_3[[i]]<-Results$opt$opt_New$opt_New_3$Utility_mMSE
+      Utility_Assumed_New_mVc_3[[i]]<-Results$opt$opt_New$opt_New_3$Utility_mVc
       
       # Sample_Real_mMSE[[i]]<-cbind(i,Results$opt[[1]]$Sample_mMSE)
       # Sample_Real_mVc[[i]]<-cbind(i,Results$opt[[1]]$Sample_mVc)
