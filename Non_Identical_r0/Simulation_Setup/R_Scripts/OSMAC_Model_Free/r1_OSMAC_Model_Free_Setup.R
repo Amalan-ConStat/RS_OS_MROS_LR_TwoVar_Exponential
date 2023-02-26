@@ -12,7 +12,7 @@ getMLE<-cmpfun(getMLE)
 Cordeiro<-cmpfun(Cordeiro)
 
 # Using OSMAC to Sub-sample from Big Data----
-Run_OSMAC_MF<-function(Replicates,r1,r2,Y,X,alpha,combs,All_Covariates,N)
+Run_OSMAC_MF<-function(Replicates,r1,r2,Y,X,alpha,combs,All_Covariates,N,Theta)
 {
   # From r0 and r conduct OSMAC subsampling for Logistic regression-----
   Parameter_mMSE<-replicate(length(combs),list()) ;
@@ -31,7 +31,7 @@ Run_OSMAC_MF<-function(Replicates,r1,r2,Y,X,alpha,combs,All_Covariates,N)
   while(i <= Replicates)
   {
     tryCatch({
-      Results<-OSMAC_MF(r1,r2,Y,X,n=N,alpha,combs,All_Covariates)
+      Results<-OSMAC_MF(r1,r2,Y,X,n=N,alpha,combs,All_Covariates,Theta)
       
       for (j in 1:length(combs)) 
       {

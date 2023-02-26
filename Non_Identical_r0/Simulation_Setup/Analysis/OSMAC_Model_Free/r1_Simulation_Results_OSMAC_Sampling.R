@@ -29,7 +29,8 @@ if(Model_Path=="Model_1")
                                 X=as.matrix(Simulated_Data[[2]]$Assumed_Model_3[,-1]),
                                 alpha = rep(1/4,length(combs)), N=Simulated_Data$Basic$N,
                                 All_Covariates=All_Covariates,
-                                combs=combs)
+                                combs=combs,
+                                Theta=Simulated_Data$Basic$Theta)
 }
 
 # Model 2 ----
@@ -48,7 +49,8 @@ if(Model_Path=="Model_2")
                                 X=as.matrix(Simulated_Data[[2]]$Assumed_Model_3[,-1]),
                                 alpha = rep(1/4,length(combs)), N=Simulated_Data$Basic$N,
                                 All_Covariates=All_Covariates,
-                                combs=combs)
+                                combs=combs,
+                                Theta=Simulated_Data$Basic$Theta)
 }
 
 # Model 3 ----
@@ -66,7 +68,8 @@ if(Model_Path=="Model_3")
                                 X=as.matrix(Simulated_Data[[2]]$Assumed_Model_3[,-1]),
                                 alpha = rep(1/4,length(combs)), N=Simulated_Data$Basic$N,
                                 All_Covariates=All_Covariates,
-                                combs=combs)
+                                combs=combs,
+                                Theta=Simulated_Data$Basic$Theta)
 }
 
 # Model 4 ----
@@ -84,5 +87,6 @@ if(Model_Path=="Model_4")
                                 X=as.matrix(Simulated_Data[[2]]$Real_Model[,-1]),
                                 alpha = rep(1/4,length(combs)), N=Simulated_Data$Basic$N,
                                 All_Covariates=All_Covariates,
-                                combs=combs)
+                                combs=combs,
+                                Theta=Simulated_Data$Basic$Theta)
 }

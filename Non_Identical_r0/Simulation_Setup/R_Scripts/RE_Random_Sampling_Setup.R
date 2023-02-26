@@ -5,7 +5,7 @@ library(LaplacesDemon)
 library(psych)
 
 # Using Rare event Random Sampling Sub-sample from Big Data----
-Run_RE_RandomSample <- function(Replicates,FullData,Subsample_Size,N,Choices,No_of_models)
+Run_RE_RandomSample <- function(Replicates,FullData,Subsample_Size,N,Choices,No_of_models,Theta)
 {
   #RandomSample<-list()
   #Sample_RE_RS<-list()
@@ -44,12 +44,12 @@ Run_RE_RandomSample <- function(Replicates,FullData,Subsample_Size,N,Choices,No_
         Est_Parameter[j,]<-c(Choices[j],Results$coefficients)
         Bias[j,]<-c(Choices[j],Temp_results$coefficients-Results$coefficients)
         
-        pi<-invlogit(as.matrix(Temp_Temp_Data[,-1])%*% as.vector(Results$coefficients))
-        W<-diag(as.vector(pi*(1-pi)*Results$prior.weights))
-        Info_matrix<-t(as.matrix(Temp_Temp_Data[,-1])) %*% W %*% as.matrix(Temp_Temp_Data[,-1])
+        pi_1<-invlogit(as.matrix(Temp_Temp_Data[,-1])%*% Theta)
+        W_1<-diag(as.vector(pi_1*(1-pi_1)))
+        Mx_1<-t(as.matrix(Temp_Temp_Data[,-1])) %*% W_1 %*% as.matrix(Temp_Temp_Data[,-1])
         
         optimality[j,]<-c(Choices[j],(nrow(Temp_Temp_Data)/(nrow(Temp_Temp_Data)+length(Results$coefficients)))^2*tr(vcov(Results)),
-                          det(Info_matrix) )
+                          det(Mx_1) )
       }
       
       All_Parameter[[i]]<-Est_Parameter

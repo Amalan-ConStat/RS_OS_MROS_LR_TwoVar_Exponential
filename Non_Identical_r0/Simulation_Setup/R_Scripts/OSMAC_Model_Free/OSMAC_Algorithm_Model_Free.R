@@ -47,7 +47,7 @@ getMLE <- function(x, y, w) {
 }
 
 # Two Step OSMAC ----
-OSMAC_MF <- function(r1,r2,Y,X,n,alpha,combs,All_Covariates) {
+OSMAC_MF <- function(r1,r2,Y,X,n,alpha,combs,All_Covariates,Theta) {
   n1 <- sum(Y)
   n0 <- n - n1
   PI.prop <- rep(1/(2*n0), n)
@@ -152,6 +152,12 @@ OSMAC_MF <- function(r1,r2,Y,X,n,alpha,combs,All_Covariates) {
       Utility_mVc[[j]][i,]<-cbind(r2[i],tr(V_Final),det(solve(V_Final))) #
     }
     
+    pi_1 <- invlogit(X[c(idx.mVc, idx.prop),All_Covariates %in% combs[[1]] ] %*% Theta) #
+    W_1 <- diag(as.vector(pi_1*(1-pi_1))) #
+    Mx_1 <- (t(X[c(idx.mVc, idx.prop),All_Covariates %in% combs[[1]] ]) %*% 
+             W_1 %*% X[c(idx.mVc, idx.prop),All_Covariates %in% combs[[1]] ])
+    Utility_mVc[[1]][i,3]<-det(Mx_1) #
+    
     ## mMSE
     idx.mMSE <- sample(1:n, r2[i]-r1, T, pjoin.mMSE)
     
@@ -187,6 +193,11 @@ OSMAC_MF <- function(r1,r2,Y,X,n,alpha,combs,All_Covariates) {
       
       Utility_mMSE[[j]][i,]<-cbind(r2[i],tr(V_Final),det(solve(V_Final))) #
     }
+    pi_1 <- invlogit(X[c(idx.mMSE, idx.prop),All_Covariates %in% combs[[1]] ] %*% Theta) #
+    W_1 <- diag(as.vector(pi_1*(1-pi_1))) #
+    Mx_1 <- (t(X[c(idx.mMSE, idx.prop),All_Covariates %in% combs[[1]] ]) %*% 
+             W_1 %*% X[c(idx.mMSE, idx.prop),All_Covariates %in% combs[[1]] ])
+    Utility_mMSE[[1]][i,3]<-det(Mx_1) #
   }
   
   #Sample_mVc<-do.call(rbind,Sample.mVc) #

@@ -47,7 +47,7 @@ getMLE <- function(x, y, w) {
 }
 
 # Two step OSMAC ----
-AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
+AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates,Theta){
     Y_Real<-Real_Data[,1] #  Real Data
     X_Real<-Real_Data[,-1] # Real Data
     
@@ -289,7 +289,11 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
       V_Temp<-(t(x_Real.mVc)%*%Middle%*%x_Real.mVc)
       V_Final<-Mx %*% V_Temp %*% Mx
       
-      Utility_mVc_Real[i,]<-cbind(r2[i],tr(V_Final),det(solve(V_Final)))
+      pi_1<- invlogit(x_Real.mVc %*% Theta)
+      W_1<-diag(as.vector(pi_1*(1-pi_1)))
+      Mx_1<-(t(x_Real.mVc) %*% W_1 %*% x_Real.mVc)
+      
+      Utility_mVc_Real[i,]<-cbind(r2[i],tr(V_Final),det(Mx_1))
       Bias_mVc_Real[i,]<-Cordeiro(XData=x_Real.mVc,With_bias = beta.mVc_Real[i,])
       
       # Assumed Data Old probabilities
@@ -316,9 +320,21 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
         Mx[[j]] %*% V_Temp[[j]] %*% Mx[[j]]
       }) 
       
+      pi_1<- lapply(1:length(combs), function(j){
+        invlogit(x_Assumed.mVc[[j]] %*% Theta)
+      })
+      
+      W_1<-lapply(1:length(combs),function(j){
+        diag(as.vector(pi_1[[j]]*(1-pi_1[[j]])))
+      })
+      
+      Mx_1<-lapply(1:length(combs),function(j){
+        (t(x_Assumed.mVc[[j]]) %*% W_1[[j]] %*% x_Assumed.mVc[[j]])
+      })
+      
       for (j in 1:length(combs)) 
       {
-        Utility_mVc_Old[[j]][i,]<-cbind(r2[i],tr(V_Final[[j]]),det(solve(V_Final[[j]])))
+        Utility_mVc_Old[[j]][i,]<-cbind(r2[i],tr(V_Final[[j]]),det(Mx_1[[j]]))
         Bias_mVc_Old[[j]][i,]<-Cordeiro(XData=x_Assumed.mVc[[j]],With_bias = beta.mVc_Old[[j]][i,])    
       }
       
@@ -343,9 +359,19 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
         Mx[[j]] %*% V_Temp[[j]] %*% Mx[[j]]
         }) 
       
+      pi_1<- lapply(1:length(combs),function(j){
+        invlogit(x_Assumed.mVc[[j]] %*% Theta)
+      })
+      W_1<-lapply(1:length(combs),function(j){
+        diag(as.vector(pi_1[[j]]*(1-pi_1[[j]])))
+      }) 
+      Mx_1<-lapply(1:length(combs),function(j){
+        (t(x_Assumed.mVc[[j]]) %*% W_1[[j]] %*% x_Assumed.mVc[[j]])
+      })
+      
       for (j in 1:length(combs)) 
       {
-        Utility_mVc_New[[j]][i,]<-cbind(r2[i],tr(V_Final[[j]]),det(solve(V_Final[[j]])))
+        Utility_mVc_New[[j]][i,]<-cbind(r2[i],tr(V_Final[[j]]),det(Mx_1[[j]]))
         Bias_mVc_New[[j]][i,]<-Cordeiro(XData=x_Assumed.mVc[[j]],With_bias = beta.mVc_New[[j]][i,])    
       }
       
@@ -359,7 +385,11 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
       V_Temp<-(t(x_join.mVc)%*%Middle%*%x_join.mVc)
       V_Final<-Mx %*% V_Temp %*% Mx
       
-      Utility_mVc_join[i,]<-cbind(r2[i],tr(V_Final),det(solve(V_Final)))
+      pi_1<- invlogit(x_join.mVc %*% Theta)
+      W_1<-diag(as.vector(pi_1*(1-pi_1)))
+      Mx_1<-(t(x_join.mVc) %*% W_1 %*% x_join.mVc)
+      
+      Utility_mVc_join[i,]<-cbind(r2[i],tr(V_Final),det(Mx_1))
       Bias_mVc_join[i,]<-Cordeiro(XData=x_join.mVc,With_bias = beta.mVc_join[i,])    
       
       ## mMSE
@@ -448,7 +478,11 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
       V_Temp<-(t(x_Real.mMSE)%*%Middle%*%x_Real.mMSE)
       V_Final<-Mx %*% V_Temp %*% Mx
       
-      Utility_mMSE_Real[i,]<-cbind(r2[i],tr(V_Final),det(solve(V_Final)))
+      pi_1<- invlogit(x_Real.mMSE %*% Theta)
+      W_1<-diag(as.vector(pi_1*(1-pi_1)))
+      Mx_1<-(t(x_Real.mMSE) %*% W_1 %*% x_Real.mMSE)
+      
+      Utility_mMSE_Real[i,]<-cbind(r2[i],tr(V_Final),det(Mx_1))
       Bias_mMSE_Real[i,]<-Cordeiro(XData=x_Real.mMSE,With_bias = beta.mMSE_Real[i,])
       
       # Assumed Data Old probabilities
@@ -472,9 +506,19 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
         Mx[[j]] %*% V_Temp[[j]] %*% Mx[[j]]
       }) 
       
+      pi_1<-lapply(1:length(combs),function(j){
+        invlogit(x_Assumed.mMSE[[j]] %*% Theta)
+      }) 
+      W_1<-lapply(1:length(combs),function(j){
+        diag(as.vector(pi_1[[j]]*(1-pi_1[[j]])))
+      }) 
+      Mx_1<-lapply(1:length(combs),function(j){
+        (t(x_Assumed.mMSE[[j]]) %*% W_1[[j]] %*% x_Assumed.mMSE[[j]])
+      })
+      
       for (j in 1:length(combs)) 
       {
-        Utility_mMSE_Old[[j]][i,]<-cbind(r2[i],tr(V_Final[[j]]),det(solve(V_Final[[j]])))
+        Utility_mMSE_Old[[j]][i,]<-cbind(r2[i],tr(V_Final[[j]]),det(Mx_1[[j]]))
         Bias_mMSE_Old[[j]][i,]<-Cordeiro(XData=x_Assumed.mMSE[[j]],With_bias = beta.mMSE_Old[[j]][i,])    
       }
       
@@ -499,9 +543,19 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
         Mx[[j]] %*% V_Temp[[j]] %*% Mx[[j]]
       })
       
+      pi_1<- lapply(1:length(combs),function(j){
+        invlogit(x_Assumed.mMSE[[j]] %*% Theta)
+      }) 
+      W_1<-lapply(1:length(combs),function(j){
+        diag(as.vector(pi_1[[j]]*(1-pi_1[[j]])))
+      }) 
+      Mx_1<-lapply(1:length(combs),function(j){
+        (t(x_Assumed.mMSE[[j]]) %*% W_1[[j]] %*% x_Assumed.mMSE[[j]])
+      })
+      
       for(j in 1:length(combs))
       {
-        Utility_mMSE_New[[j]][i,]<-cbind(r2[i],tr(V_Final[[j]]),det(solve(V_Final[[j]])))
+        Utility_mMSE_New[[j]][i,]<-cbind(r2[i],tr(V_Final[[j]]),det(Mx_1[[j]]))
         Bias_mMSE_New[[j]][i,]<-Cordeiro(XData=x_Assumed.mMSE[[j]],With_bias = beta.mMSE_New[[j]][i,])
       }
           
@@ -515,7 +569,11 @@ AlgTwoStp <- function(r1=r1, r2=r2,Y,X,n,Real_Data,alpha,combs,All_Covariates){
       V_Temp<-(t(x_join.mMSE)%*%Middle%*%x_join.mMSE)
       V_Final<-Mx %*% V_Temp %*% Mx
       
-      Utility_mMSE_join[i,]<-cbind(r2[i],tr(V_Final),det(solve(V_Final)))
+      pi_1<- invlogit(x_join.mMSE %*% Theta)
+      W_1<-diag(as.vector(pi_1*(1-pi_1)))
+      Mx_1<-(t(x_join.mMSE) %*% W_1 %*% x_join.mMSE)
+      
+      Utility_mMSE_join[i,]<-cbind(r2[i],tr(V_Final),det(Mx_1))
       Bias_mMSE_join[i,]<-Cordeiro(XData=x_join.mMSE,With_bias = beta.mMSE_join[i,])    
     }
     

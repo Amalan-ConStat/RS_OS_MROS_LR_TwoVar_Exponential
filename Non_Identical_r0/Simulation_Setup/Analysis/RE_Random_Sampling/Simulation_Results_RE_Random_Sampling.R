@@ -17,7 +17,8 @@ Final_Parameter<-Run_RE_RandomSample(Replicates = Replicates,
                                      FullData = Simulated_Data[[2]]$Real_Model,
                                      N=Simulated_Data$Basic$N,
                                      Subsample_Size=Subsample_Size,Choices=c(100*(2:15)),
-                                     No_of_models = 4)
+                                     No_of_models = 4,
+                                     Theta=Simulated_Data$Basic$Theta)
 
 Est_Param_RE_RandomSample<-Final_Parameter$EstPar[[1]]
 Utility_RE_RandomSample<-Final_Parameter$Utility[[1]]

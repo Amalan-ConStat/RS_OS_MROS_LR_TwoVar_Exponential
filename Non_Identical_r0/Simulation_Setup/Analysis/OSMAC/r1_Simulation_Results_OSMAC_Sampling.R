@@ -18,7 +18,8 @@ Final_Parameter<-Run_OSMAC(Replicates=Replicates,r1=100*(1:9),r2=1000,
                            Y=as.matrix(Simulated_Data[[2]]$Real_Model[,1]),
                            X=as.matrix(Simulated_Data[[2]]$Real_Model[,-1]),
                            Real_Data=as.matrix(Simulated_Data[[2]]$Real_Model),
-                           N=Simulated_Data$Basic$N,Model="Real_Model")
+                           N=Simulated_Data$Basic$N,Model="Real_Model",
+                           Theta=Simulated_Data$Basic$Theta)
 
 # Assumed Model 1 ----
 # Generate for Random sample of 1000 different times ---
@@ -27,7 +28,8 @@ Final_Parameter<-Run_OSMAC(Replicates=Replicates,r1=100*(1:9),r2=1000,
                            Y=as.matrix(Simulated_Data[[2]]$Assumed_Model_1[,1]),
                            X=as.matrix(Simulated_Data[[2]]$Assumed_Model_1[,-1]),
                            Real_Data = as.matrix(Simulated_Data[[2]]$Real_Model),
-                           N=Simulated_Data$Basic$N, Model="Assumed_Model_1")
+                           N=Simulated_Data$Basic$N, Model="Assumed_Model_1",
+                           Theta=Simulated_Data$Basic$Theta)
 
 # Assumed Model 2 ----
 # Generate for Random sample of 1000 different times ---
@@ -36,7 +38,8 @@ Final_Parameter<-Run_OSMAC(Replicates=Replicates,r1=100*(1:9),r2=1000,
                            Y=as.matrix(Simulated_Data[[2]]$Assumed_Model_2[,1]),
                            X=as.matrix(Simulated_Data[[2]]$Assumed_Model_2[,-1]),
                            Real_Data = as.matrix(Simulated_Data[[2]]$Real_Model),
-                           N=Simulated_Data$Basic$N, Model="Assumed_Model_2")
+                           N=Simulated_Data$Basic$N, Model="Assumed_Model_2",
+                           Theta=Simulated_Data$Basic$Theta)
 
 # Assumed Model 3 ----
 # Generate for Random sample of 1000 different times ---
@@ -45,4 +48,5 @@ Final_Parameter<-Run_OSMAC(Replicates=Replicates,r1=100*(1:9),r2=1000,
                            Y=as.matrix(Simulated_Data[[2]]$Assumed_Model_3[,1]),
                            X=as.matrix(Simulated_Data[[2]]$Assumed_Model_3[,-1]),
                            Real_Data = as.matrix(Simulated_Data[[2]]$Real_Model),
-                           N=Simulated_Data$Basic$N,Model="Assumed_Model_3")
+                           N=Simulated_Data$Basic$N,Model="Assumed_Model_3",
+                           Theta=Simulated_Data$Basic$Theta)
